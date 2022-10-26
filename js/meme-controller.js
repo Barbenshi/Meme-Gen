@@ -9,33 +9,40 @@ function onInit() {
     renderGallery()
 
     addListeners()
+    renderMeme()
 }
 
 
 
 function renderMeme() {
-    const {lines,selectedImgId,selectedLineIdx} = getMeme()
+    const { lines, selectedImgId, selectedLineIdx } = getMeme()
     const line = lines[selectedLineIdx]
-    const {url} = getImg(selectedImgId)
+    const { url } = getImg(selectedImgId)
 
     const img = new Image()
+    let imgAspect
     img.src = url
     img.onload = () => {
+        imgAspect = img.naturalWidth / img.naturalHeight
+        gElCanvas.width =  300 * imgAspect
+        // gElCanvas.height = img.naturalHeight * gElCanvas.width / img.naturalWidth
+        gElCanvas.height = 300
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+        // gCtx.drawImage(img, 0, 0, img.width, img.height)
         drawText(line)
     }
 }
 
 function resizeCanvas() {
-    const elCanvasDiv = document.querySelector('.canvas-container')
-    gElCanvas.width = elCanvasDiv.offsetWidth
-    gElCanvas.height = elCanvasDiv.offsetHeight
+    // const elCanvasDiv = document.querySelector('.canvas-container')
+    // gElCanvas.width = elCanvasDiv.offsetWidth 
+    // gElCanvas.height = elCanvasDiv.offsetHeight
 }
 
 function drawImageFromLocal() {
 }
 
-function drawText({txt = document.querySelector('input').placeholder,size = 20, align = 'center',color = 'white'}) {
+function drawText({ txt = document.querySelector('input').placeholder, size = 20, align = 'center', color = 'white' }) {
     gCtx.lineWidth = 2
     gCtx.strokeStyle = 'black'
     gCtx.fillStyle = color
@@ -45,17 +52,17 @@ function drawText({txt = document.querySelector('input').placeholder,size = 20, 
     // x -= text.length * 2
 
     //Todo align text
-    let x = midTextLength *20
-    switch(align){
+    let x = midTextLength * 20
+    switch (align) {
         case 'left':
-            x=10
+            x = 10
             break
         case 'right':
-            x=140
+            x = 140
             break
         case 'center':
-            x= 70
-            break        
+            x = 70
+            break
     }
 
     gCtx.font = `${size}px Impact`
@@ -86,22 +93,22 @@ function addListeners() {
 // }
 
 
-function onSetLineTxt(txt){
+function onSetLineTxt(txt) {
     setLineTxt(txt)
     renderMeme()
 }
 
-function onChangeColor(color){
+function onChangeColor(color) {
     changeColor(color)
     renderMeme()
 }
 
-function onUpdateFontSize(num){
+function onUpdateFontSize(num) {
     updateFontSize(num)
     renderMeme()
 }
 
-function onSwitchLineFocus(){
+function onSwitchLineFocus() {
     switchLineFocus()
     renderMeme()
 }

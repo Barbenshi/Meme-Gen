@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MEMEGEN</title>
     <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 
@@ -14,18 +15,19 @@
     <header class="main-header full main-layout">
         <div class="content-container flex space-between align-center">
 
-            <div class="logo">
+            <div class="logo" onclick="onShowGallery()">
                 <img src="img/logo/LOGO.png" alt="">
             </div>
             <nav class="main-nav">
                 <ul class="flex clean-list">
-                    <li><a href="#">Gallery</a></li>
-                    <li><a href="#">About</a></li>
+                    <li><a href="#" onclick="onShowGallery()">Gallery</a></li>
+                    <li><a href="#about" onclick="onShowAbout()">About</a></li>
                 </ul>
             </nav>
+            <button class="menu-btn" onclick="onToggleMenu(this)">click</button>
         </div>
 
-        </header>
+    </header>
 
     <header class="secondary-header full main-layout">
         <div class="content-container flex space-between">
@@ -40,26 +42,44 @@
             <article><img src="img/1.jpg" alt=""></article>
         </section>
 
-        <section class="img-editor flex  hide">
-            <div class="canvas-container flex-1">
+        <section class="img-editor flex flex-column align-center hide">
+            <div class="canvas-container">
                 <canvas id="c" height="250" width="250" style="border:1px solid black"></canvas>
             </div>
-            <div class="features">
-                <button onclick="toggleDisplay()">Goback to Gallery</button>
+            <div class="features flex flex-column fa-solid">
+                <button onclick="toggleDisplay()" class="gallery-btn">Go back to Gallery</button>
                 <input type="text" oninput="onSetLineTxt(this.value)" placeholder="Enter your Meme line here">
-                <input class="color-picker btn" type="color" name="text-color" onchange="onChangeColor(this.value)"
-                    value="#ff0000">
-                <button onclick="onUpdateFontSize(1)">Increase Font</button>
-                <button onclick="onUpdateFontSize(-1)">Decrease Font</button>
-                <button onclick="onSwitchLineFocus()">Switch Line</button>
+                <div class="text-modifiers flex">
+                    <button onclick="onSwitchLineFocus()" class="switch">
+                        <svg viewBox="0 0 512 512">
+                            <path
+                                d="M403.8 34.4c12-5 25.7-2.2 34.9 6.9l64 64c6 6 9.4 14.1 9.4 22.6s-3.4 16.6-9.4 22.6l-64 64c-9.2 9.2-22.9 11.9-34.9 6.9s-19.8-16.6-19.8-29.6V160H352c-10.1 0-19.6 4.7-25.6 12.8L284 229.3 244 176l31.2-41.6C293.3 110.2 321.8 96 352 96h32V64c0-12.9 7.8-24.6 19.8-29.6zM164 282.7L204 336l-31.2 41.6C154.7 401.8 126.2 416 96 416H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H96c10.1 0 19.6-4.7 25.6-12.8L164 282.7zm274.6 188c-9.2 9.2-22.9 11.9-34.9 6.9s-19.8-16.6-19.8-29.6V416H352c-30.2 0-58.7-14.2-76.8-38.4L121.6 172.8c-6-8.1-15.5-12.8-25.6-12.8H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H96c30.2 0 58.7 14.2 76.8 38.4L326.4 339.2c6 8.1 15.5 12.8 25.6 12.8h32V320c0-12.9 7.8-24.6 19.8-29.6s25.7-2.2 34.9 6.9l64 64c6 6 9.4 14.1 9.4 22.6s-3.4 16.6-9.4 22.6l-64 64z" />
+                        </svg>
+                    </button>
+                    <!-- TODO add remove and add button -->
+                </div>
+
+                <div class="text-decorations flex flex-wrap justify-center align-center">
+                    <button onclick="onUpdateFontSize(1)">A+</button>
+                    <button onclick="onUpdateFontSize(-1)">A-</button>
+                    <label class="input-color-label btn">
+                        <svg viewBox="0 0 512 512">
+                            <path
+                                d="M341.6 29.2L240.1 130.8l-9.4-9.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-9.4-9.4L482.8 170.4c39-39 39-102.2 0-141.1s-102.2-39-141.1 0zM55.4 323.3c-15 15-23.4 35.4-23.4 56.6v42.4L5.4 462.2c-8.5 12.7-6.8 29.6 4 40.4s27.7 12.5 40.4 4L89.7 480h42.4c21.2 0 41.6-8.4 56.6-23.4L309.4 335.9l-45.3-45.3L143.4 411.3c-3 3-7.1 4.7-11.3 4.7H96V379.9c0-4.2 1.7-8.3 4.7-11.3L221.4 247.9l-45.3-45.3L55.4 323.3z" />
+                        </svg>
+                        <input class="color-picker btn" type="color" name="text-color"
+                            onchange="onChangeColor(this.value)" value="#ff0000">
+                    </label>
+                </div>
             </div>
         </section>
     </main>
 
-    <footer class="main-footer  full main-layout align-center">
-        <div class="content-container flex justify-center align-center">
+    <a name="about"></a>
+    <footer class="main-footer full main-layout align-center">
+        <div class="content-container flex flex-column justify-center align-center">
             <img src="img/personal-img/bar-pic.jpg" alt="my-image">
-            <section class="personal-info flex flex-column justify-center">
+            <section class="personal-info flex flex-column justify-center align-center">
                 <h2>Bar Ben Shimol</h2>
                 <p>Info About me</p>
                 <section class="social-links">

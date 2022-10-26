@@ -26,3 +26,13 @@ function toggleDisplay(){
     document.querySelector('.img-editor').classList.toggle('hide')
     document.querySelector('.main-footer').classList.toggle('hide')
 }
+
+function onShowGallery(){
+    document.querySelector('.img-gallery').classList.remove('hide')
+    document.querySelector('.img-editor').classList.add('hide')
+    document.querySelector('.main-footer').classList.remove('hide')
+}
+
+function onShowAbout(){
+    document.querySelector('.main-footer').classList.remove('hide')
+}
