@@ -18,6 +18,13 @@ var gMeme = {
             size: 20,
             align: 'left',
             color: 'red'
+        },
+
+        {
+            txt: 'I sometimes eat Shnitzel',
+            size: 20,
+            align: 'left',
+            color: 'red'
         }
     ]
 }
@@ -30,19 +37,23 @@ function getImg(imgId) {
     return gImgs.find(({ id }) => id === imgId)
 }
 
-function setLineTxt(txt){
+function setLineTxt(txt) {
     gMeme.lines[gMeme.selectedLineIdx].txt = txt
 }
 
-function setImg(imgId){
+function setImg(imgId) {
     gMeme.selectedImgId = imgId
 }
 
-function changeColor(color){
+function changeColor(color) {
     gMeme.lines[gMeme.selectedLineIdx].color = color
 }
 
-function updateFontSize(num){
+function updateFontSize(num) {
     gMeme.lines[gMeme.selectedLineIdx].size += num
+}
+
+function switchLineFocus() {
+    gMeme.selectedLineIdx = gMeme.lines.length-1 === gMeme.selectedLineIdx ? 0 : gMeme.selectedLineIdx + 1
 }
 

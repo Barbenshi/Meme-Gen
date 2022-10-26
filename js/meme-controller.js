@@ -68,3 +68,8 @@ function onUpdateFontSize(num){
     updateFontSize(num)
     renderMeme()
 }
+
+function onSwitchLineFocus(){
+    switchLineFocus()
+    renderMeme()
+}
