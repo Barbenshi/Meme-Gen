@@ -6,7 +6,7 @@ let gCtx
 function onInit() {
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
-
+    renderGallery()
     renderMeme()
 }
 
@@ -52,4 +52,19 @@ function drawText({txt = document.querySelector('input').placeholder,size = 20, 
     gCtx.font = `${size}px Impact`
     gCtx.fillText(txt, x, y) // Draws (fills) a given text at the given (x, y) position.
     gCtx.strokeText(txt, x, y) // Draws (strokes) a given text at the given (x, y) position.
+}
+
+function onSetLineTxt(txt){
+    setLineTxt(txt)
+    renderMeme()
+}
+
+function onChangeColor(color){
+    changeColor(color)
+    renderMeme()
+}
+
+function onUpdateFontSize(num){
+    updateFontSize(num)
+    renderMeme()
 }

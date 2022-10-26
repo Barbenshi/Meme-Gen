@@ -6,13 +6,7 @@ var gKeywordSearchCountMap = {
     'baby': 2
 }
 
-var gImgs = [
-    {
-        id: 1,
-        url: 'img/2.jpg',
-        keywords: ['funny', 'cat']
-    }
-]
+
 
 var gMeme = {
     selectedImgId: 1,
@@ -35,3 +29,20 @@ function getMeme() {
 function getImg(imgId) {
     return gImgs.find(({ id }) => id === imgId)
 }
+
+function setLineTxt(txt){
+    gMeme.lines[gMeme.selectedLineIdx].txt = txt
+}
+
+function setImg(imgId){
+    gMeme.selectedImgId = imgId
+}
+
+function changeColor(color){
+    gMeme.lines[gMeme.selectedLineIdx].color = color
+}
+
+function updateFontSize(num){
+    gMeme.lines[gMeme.selectedLineIdx].size += num
+}
+
