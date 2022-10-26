@@ -258,11 +258,16 @@ main .img-gallery:not(.hide) {
 /* main-header */
 
 .main-header .content-container {
-    padding: 15px 0;
     position: relative;
+    height: 100%;
 }
 
+
 @media (min-width:840px) {
+    .main-header .content-container {
+        padding: 15px 0;
+        position: static;
+    }
 
     .main-header .main-nav a {
         font-size: 1.25rem;
@@ -275,23 +280,14 @@ main .img-gallery:not(.hide) {
 
         transition: box-shadow .6s;
     }
+
+    .main-nav{
+        width: auto;
+    }
 }
 
-.main-header .main-nav {
-    position: absolute;
-    z-index: -1;
-}
 
-.main-header .main-nav ul {
-    flex-direction: column;
-    background-color: var(--primaryClr);
-    /* z-index: -1; */
-    /* width: 100vw; */
-}
 
-body.menu-open .main-nav ul{
-    transform: translateY(100%);
- }
 
 .main-header a.active {
     color: var(--clr1);
@@ -335,9 +331,6 @@ main .img-editor .canvas-container {
     height: 500px;
 }
 
-/* main .img-editor button{
-    min-width: 50px
-} */
 
 main .img-editor .features button:not(.gallery-btn),
 .features .btn {
@@ -428,8 +421,8 @@ main .img-editor .gallery-btn:hover::before {
 @media (max-width: 800px) {
 
     .main-header {
-        padding-left: 20px;
-        padding-right: 20px;
+        /* padding-left: 20px; */
+        /* padding-right: 20px; */
         position: fixed;
         z-index: 1;
         width: 100%;
@@ -448,4 +441,51 @@ main .img-editor .gallery-btn:hover::before {
         align-items: center;
         justify-content: center;
     }
+
+    .main-header .main-nav {
+        position: absolute;
+        width: 100%;
+        bottom: 0;
+        transform: translateY(100%);
+        max-height: 0;
+        overflow: hidden;
+        background-color: var(--primaryClr);
+        transition: opacity 0.8s, max-height 0.8s;
+    }
+
+    
+    .main-header .main-nav ul {
+        flex-direction: column;
+    }
+    
+    body.menu-open .main-nav{
+        max-height: 100%;
+     }
+
+     .main-nav li{
+        flex-basis: 30px;
+     }
+
+     .main-nav a{
+        color: var(--clr0);
+     }
+
+     body.menu-open .main-nav li{
+        border:none;
+     }
+
+     .menu-btn{
+        width: 50px;
+        height: 50px;
+     }
+
+     .main-header .menu-btn::before{
+        content: '☰';
+        font-size: 1.5em;
+     }
+
+     body.menu-open .menu-btn::before{
+        content:'X';
+     }
+
 }
