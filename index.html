@@ -7,7 +7,7 @@
     <title>MEMEGEN</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
-<body>
+<body onload="onInit()">
     <header class="main-header">
         <div class="logo"></div>
         <nav class="main-nav">
@@ -19,9 +19,21 @@
         </nav>
     </header>
 
-    <section class="img-gallery"></section>
-    <section class="editor"></section>
+    <main>
 
+        <section class="img-gallery grid-container"></section>
+        <section class="img-editor flex">
+         <div class="canvas-container">
+             <canvas id="c" height="250" width="250" style="border:1px solid black" ></canvas>
+            </div>
+         <div class="features">
+            <input type="text" placeholder="Enter your Meme line here">
+         </div>      
+        </section>
+        
+    </main>
+    <script src="js/main.js"></script>
+    <script src="js/meme-controller.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>
