@@ -1,0 +1,310 @@
+:root {
+    /*palleta */
+    --clr0: #ffffff;
+    --clr1: #000000;
+    --primaryClr: #ff7f00;
+    --clr2: #e3e3e3;
+    --clr3:#ffad5c;
+
+    /* width */
+    --l: 980px;
+    --m: 800px;
+    --s: 700px;
+}
+
+/* TYPOGHRAPHY */
+@font-face {
+    font-family: eurofurence;
+    src: url('../fonts/eurofurence/eurofurence-regular.ttf');
+}
+
+@font-face {
+    font-family: lato-reg;
+    src: url('../fonts/lato/Lato-Regular.ttf');
+}
+
+@font-face {
+    font-family: lato-bold;
+    src: url('../fonts/lato/Lato-Bold.ttf');
+}
+
+@font-face {
+    font-family: montserrat-reg;
+    src: url('../fonts/Montserrat/Montserrat-Regular.ttf');
+}
+
+@font-face {
+    font-family: fa-brands;
+    src: url('../fonts/fa/fa-brands-400.ttf');
+}
+
+/* BASICS */
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: montserrat-reg, sans-serif;
+    background-color: var(--primaryClr);
+    color: var(--clr1);
+}
+
+body {
+    margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+    padding-bottom: 0.875em;
+}
+
+a {
+    text-decoration: none;
+    color: var(--clr1);
+}
+
+img {
+    width: 100%;
+}
+
+main {
+    background-color: var(--clr2);
+}
+
+header {}
+
+p {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+small {
+    color: var(--clr0);
+}
+
+header:not(.full),
+main:not(.full),
+footer:not(.full),
+header.full>*,
+main.full>*,
+footer.full>* {
+    border-right: 1px solid var(--clr3);
+    border-left: 1px solid var(--clr3);
+}
+
+/* buttons */
+button,
+.btn {
+    color: var(--clr0);
+    background-color: var(--primaryClr);
+    padding: 0.625em 0.625em;
+    border: none;
+    border-radius: 0.8em;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.btn-round {
+    border-radius: 2em;
+}
+
+.btn-prev::before {
+    content: " ← ";
+}
+
+.btn-next::after {
+    content: " → ";
+}
+
+
+
+/* HELPERS */
+
+
+
+/* flex helpers */
+
+.flex {
+    display: flex;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.flex-1{
+    flex-grow:1;
+}
+
+
+
+
+/* list helpers */
+
+.clean-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+/* icon helper */
+
+.fa-brands {
+    font-family: fa-brands;
+}
+
+.fa-brands .facebook::before {
+    content: "\f39e"
+}
+
+.fa-brands .linkedin::before {
+    content: "\f0e1"
+}
+
+.fa-brands .git::before {
+    content: "\f09b"
+}
+
+
+/* hide */
+.hide {
+    display: none;
+}
+
+
+/* LAYOUT */
+
+.main-layout>*:not(.full) {
+    width: var(--m);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+main .img-gallery:not(.hide) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 5px;
+}
+
+
+
+/* COMPONENTS */
+
+/* main-header */
+.main-header {
+   
+}
+
+.main-header .content-container {
+    padding: 15px 0;
+}
+
+.main-header .main-nav a {
+    font-size: 1.25rem;
+    color: var(--clr0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 33px;
+
+    transition: box-shadow .6s;
+}
+
+.main-header a.active {
+    color: var(--clr1);
+    box-shadow: inset 0px -4px 0;
+}
+
+.main-header li:not(:first-child) {
+    border-inline-start: 1px solid var(--clr2);
+}
+
+/* secondary-header */
+.secondary-header {
+    background-color: var(--clr0);
+}
+
+
+/* main */
+
+main .img-gallery{
+    padding-top: 27px;
+    padding-bottom: 27px;
+}
+
+main .img-editor{
+    padding-top: 27px;
+    padding-bottom: 27px;
+}
+
+main .img-editor .features{
+    flex-basis: 50%;
+}
+
+main .img-editor .canvas-container{
+    height: 500px;
+}
+
+/* main-footer */
+.main-footer {
+    background-color: var(--clr0);
+}
+
+.main-footer .content-container{
+    gap: 20px;
+    padding: 20px;
+}
+
+.main-footer img{
+    border-radius: 50%;
+    width: 250px;
+}
+
+.main-footer .social-links{
+    padding-top: 6.5625em;
+}
+
+.main-footer .social-links li{
+    padding: 0 2px;
+}
+
+/* secondary-footer */
+.secondary-footer {
+    padding-top: 77px;
+    padding-bottom: 77px;
+}
+
+.secondary-footer .logo{
+    padding-bottom: 1rem;
+}
+
+
+
+
+/* logo */
+.logo {
+    width: 8.3125rem;
+}
+
+
+

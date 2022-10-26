@@ -17,4 +17,12 @@ function renderGallery(){
 function onImgSelect(imgId){
     setImg(imgId)
     renderMeme()
+    toggleDisplay()
+    resizeCanvas()
+}
+
+function toggleDisplay(){
+    document.querySelector('.img-gallery').classList.toggle('hide')
+    document.querySelector('.img-editor').classList.toggle('hide')
+    document.querySelector('.main-footer').classList.toggle('hide')
 }

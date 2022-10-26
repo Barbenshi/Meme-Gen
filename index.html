@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,37 +8,77 @@
     <title>MEMEGEN</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
-<body onload="onInit()">
-    <header class="main-header">
-        <div class="logo"></div>
-        <nav class="main-nav">
-            <ul class="flex clean-list">
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-            </ul>
-        </nav>
+
+
+<body class="main-layout" onload="onInit()">
+    <header class="main-header full main-layout">
+        <div class="content-container flex space-between align-center">
+
+            <div class="logo">
+                <img src="img/logo/LOGO.png" alt="">
+            </div>
+            <nav class="main-nav">
+                <ul class="flex clean-list">
+                    <li><a href="#">Gallery</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        </header>
+
+    <header class="secondary-header full main-layout">
+        <div class="content-container flex space-between">
+            <input type="search" name="img-search" placeholder="🔍Search here...">
+            <p>most Common Words</p>
+        </div>
     </header>
 
-    <main>
+    <main class="full main-layout">
 
         <section class="img-gallery grid-container">
             <article><img src="img/1.jpg" alt=""></article>
         </section>
-        <section class="img-editor flex">
-         <div class="canvas-container">
-             <canvas id="c" height="250" width="250" style="border:1px solid black" ></canvas>
+
+        <section class="img-editor flex  hide">
+            <div class="canvas-container flex-1">
+                <canvas id="c" height="250" width="250" style="border:1px solid black"></canvas>
             </div>
-         <div class="features">
-            <input type="text" oninput="onSetLineTxt(this.value)" placeholder="Enter your Meme line here">
-            <input class="color-picker btn" type="color" name="text-color" onchange="onChangeColor(this.value)" value="#ff0000">
-            <button onclick="onUpdateFontSize(1)">Increase Font</button>
-            <button onclick="onUpdateFontSize(-1)">Decrease Font</button>
-            <button onclick="onSwitchLineFocus()">Switch Line</button>
-        </div>      
+            <div class="features">
+                <button onclick="toggleDisplay()">Goback to Gallery</button>
+                <input type="text" oninput="onSetLineTxt(this.value)" placeholder="Enter your Meme line here">
+                <input class="color-picker btn" type="color" name="text-color" onchange="onChangeColor(this.value)"
+                    value="#ff0000">
+                <button onclick="onUpdateFontSize(1)">Increase Font</button>
+                <button onclick="onUpdateFontSize(-1)">Decrease Font</button>
+                <button onclick="onSwitchLineFocus()">Switch Line</button>
+            </div>
         </section>
-        
     </main>
+
+    <footer class="main-footer  full main-layout align-center">
+        <div class="content-container flex justify-center align-center">
+            <img src="img/personal-img/bar-pic.jpg" alt="my-image">
+            <section class="personal-info flex flex-column justify-center">
+                <h2>Bar Ben Shimol</h2>
+                <p>Info About me</p>
+                <section class="social-links">
+                    <ul class="flex clean-list fa-brands">
+                        <li><a href="#" class="btn linkedin"></a></li>
+                        <li><a href="#" class="btn facebook"></a></li>
+                        <li><a href="#" class="btn git"></a></li>
+                    </ul>
+                </section>
+            </section>
+        </div>
+    </footer>
+    <footer class="secondary-footer flex flex-column justify-center align-center">
+        <div class="logo">
+            <img src="img/logo/LOGO.png" alt="">
+        </div>
+        <small>All Coffee Rights Comes Here</small>
+    </footer>
+
     <script src="js/main.js"></script>
     <script src="js/services/meme-service.js"></script>
     <script src="js/services/gallery-service.js"></script>
@@ -45,4 +86,5 @@
     <script src="js/meme-controller.js"></script>
     <script src="js/main.js"></script>
 </body>
+
 </html>
