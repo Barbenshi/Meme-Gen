@@ -99,7 +99,7 @@ small {
     color: var(--clr0);
 }
 
-@media (min-width:840px) {
+/* @media (min-width:840px) {
 
     header:not(.full),
     main:not(.full),
@@ -110,7 +110,8 @@ small {
         border-right: 1px solid var(--clr3);
         border-left: 1px solid var(--clr3);
     }
-}
+    borders if i want to the whole page
+} */
 
 /* buttons */
 button,
@@ -234,7 +235,7 @@ button,
         flex-direction: row;
     }
 
-    .img-editor.hide{
+    .img-editor.hide {
         display: none;
     }
 
@@ -263,7 +264,6 @@ main .img-gallery:not(.hide) {
 
 .main-header .content-container {
     position: relative;
-    height: 100%;
 }
 
 
@@ -285,7 +285,7 @@ main .img-gallery:not(.hide) {
         transition: box-shadow .6s;
     }
 
-    .main-nav{
+    .main-nav {
         width: auto;
     }
 }
@@ -313,15 +313,23 @@ main .img-gallery:not(.hide) {
     background-color: var(--clr0);
 }
 
+.secondary-header input {
+    border: 0;
+    box-shadow: inset 0px -3px 0 var(--clr2);
+}
+
+.secondary-header .content-container {
+    padding: 1rem 0;
+}
+
 
 /* main */
 
 main .img-gallery {
-    padding-top: 27px;
-    padding-bottom: 27px;
+    padding: 27px;
 }
 
-main .img-gallery img{
+main .img-gallery img {
     /* aspect-ratio: 1/1; */
     aspect-ratio: 220 / 165;
 }
@@ -331,7 +339,12 @@ main .img-editor {
     padding-bottom: 27px;
 }
 
-@media (min-width:840px){
+main .img-editor .upload-link {
+    color: var(--primaryClr);
+}
+
+@media (min-width:840px) {
+
     main .img-editor .features,
     .canvas-container {
         min-width: 400px;
@@ -341,7 +354,8 @@ main .img-editor {
 
 }
 
-@media (min-width:1020px){
+@media (min-width:1020px) {
+
     main .img-editor .features,
     .canvas-container {
         min-width: 500px;
@@ -443,7 +457,7 @@ main .img-editor .gallery-btn:hover::before {
         position: fixed;
         z-index: 1;
         width: 100%;
-        height: 7vh;
+        height: 8vh;
         background-color: var(--primaryClr);
     }
 
@@ -459,6 +473,10 @@ main .img-editor .gallery-btn:hover::before {
         justify-content: center;
     }
 
+    .secondary-header .content-container>*:not(:last-child) {
+        margin-bottom: 5px;
+    }
+
     .main-header .main-nav {
         position: absolute;
         width: 100%;
@@ -470,39 +488,41 @@ main .img-editor .gallery-btn:hover::before {
         transition: opacity 0.8s, max-height 0.8s;
     }
 
-    
+
     .main-header .main-nav ul {
         flex-direction: column;
     }
-    
-    body.menu-open .main-nav{
+
+    body.menu-open .main-nav {
         max-height: 100%;
-     }
+    }
 
-     .main-nav li{
+    .main-nav li {
         flex-basis: 30px;
-     }
+    }
 
-     .main-nav a{
+    .main-nav a {
         color: var(--clr0);
-     }
+    }
 
-     body.menu-open .main-nav li{
-        border:none;
-     }
+    body.menu-open .main-nav li {
+        border: none;
+    }
 
-     .menu-btn{
+    .menu-btn {
         width: 50px;
         height: 50px;
-     }
+    }
 
-     .main-header .menu-btn::before{
+    .main-header .menu-btn::before {
         content: '☰';
         font-size: 1.5em;
-     }
+    }
 
-     body.menu-open .menu-btn::before{
-        content:'X';
-     }
+    body.menu-open .menu-btn::before {
+        content: 'X';
+    }
+
+
 
 }

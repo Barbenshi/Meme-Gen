@@ -1,9 +1,9 @@
 'use strict'
 
 
-function renderGallery(){
+function renderGallery() {
     const imgs = getImgs()
-    const strHtmls = imgs.map(({url,id})=>`
+    const strHtmls = imgs.map(({ url, id }) => `
     <article>
     <img src=${url} alt="meme-img"
     onclick="onImgSelect(${id})" data-id="${id}" class="gallery-image">
@@ -14,35 +14,34 @@ function renderGallery(){
     document.querySelector('.img-gallery').innerHTML = strHtmls.join('')
 }
 
-function onImgSelect(imgId){
+function onImgSelect(imgId) {
     setImg(imgId)
     renderMeme()
-    toggleDisplay()
+    onShowEditor()
     resizeCanvas()
 }
 
-function toggleDisplay(){
-    document.querySelector('.img-gallery').classList.toggle('hide')
-    document.querySelector('.img-editor').classList.toggle('hide')
-    document.querySelector('.main-footer').classList.toggle('hide')
-    document.querySelector('button.flexible').classList.toggle('hide')
+function onShowEditor() {
+    document.querySelector('.img-gallery').classList.add('hide')
+    document.querySelector('.img-editor').classList.remove('hide')
+    document.querySelector('.main-footer').classList.add('hide')
+    document.querySelector('button.flexible').classList.add('hide')
 }
 
-function onShowGallery(){
+function onShowGallery() {
     document.querySelector('.img-gallery').classList.remove('hide')
     document.querySelector('.img-editor').classList.add('hide')
     document.querySelector('.main-footer').classList.remove('hide')
     document.querySelector('button.flexible').classList.remove('hide')
-    elBtn
 }
 
-function onShowAbout(){
+function onShowAbout() {
     document.querySelector('.main-footer').classList.remove('hide')
 }
 
-function onGenerateRandomMeme(elBtn){
+function onGenerateRandomMeme(elBtn) {
     generateRandomMeme()
     renderMeme()
-    toggleDisplay()
+    onShowEditor()
     elBtn.classList.add('hide')
 }
