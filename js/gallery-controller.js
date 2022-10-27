@@ -33,10 +33,12 @@ function onShowGallery() {
     document.querySelector('.img-editor').classList.add('hide')
     document.querySelector('.main-footer').classList.remove('hide')
     document.querySelector('button.flexible').classList.remove('hide')
+    document.body.classList.remove('menu-open')
 }
 
 function onShowAbout() {
     document.querySelector('.main-footer').classList.remove('hide')
+    document.body.classList.remove('menu-open')
 }
 
 function onGenerateRandomMeme(elBtn) {

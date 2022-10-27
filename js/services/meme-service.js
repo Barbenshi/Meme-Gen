@@ -81,14 +81,14 @@ function addLine(txt) {
     const heightSpace = 50
     const line = {
         txt,
-        size : 30,
+        size: 30,
         align: 'left',
         isDragged: false,
         pos: { x: 20, y: heightSpace },
         width: 300,
         height: 30,
     }
-    
+
     if (gMeme.lines.length >= 2) {
         line.pos.y = heightSpace * gMeme.lines.length
         line.size = 20
@@ -149,7 +149,13 @@ function moveLine(dx, dy) {
     gMeme.lines[gMeme.selectedLineIdx].pos.y += dy
 }
 
-function setCanvasHeight(height = gCanvasHeight){
+function setCanvasHeight(height = gCanvasHeight) {
     gCanvasHeight = height
+}
+
+function alignText(num, canvasWidth) {
+    if (num === 1) gMeme.lines[gMeme.selectedLineIdx].pos.x = 20
+    else if (num === -1) gMeme.lines[gMeme.selectedLineIdx].pos.x = canvasWidth - gMeme.lines[gMeme.selectedLineIdx].width - 20
+    else gMeme.lines[gMeme.selectedLineIdx].pos.x = canvasWidth / 2 - gMeme.lines[gMeme.selectedLineIdx].width / 2
 }
 

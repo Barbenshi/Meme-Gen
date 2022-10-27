@@ -60,15 +60,25 @@
                 </div>
 
                 <div class="text-decorations flex flex-wrap justify-center align-center">
-                    <button title="Bigger font" onclick="onUpdateFontSize(1)"><i class="fa fa-font"
-                            aria-hidden="true"></i>+</button>
-                    <button title="Smaller font" onclick="onUpdateFontSize(-1)"><i class="fa fa-font"
-                            aria-hidden="true"></i>-</button>
+                    <div class="font-size-btns">
+                        <button title="Bigger font" onclick="onUpdateFontSize(1)"><i class="fa fa-font"
+                                aria-hidden="true"></i>+</button>
+                        <button title="Smaller font" onclick="onUpdateFontSize(-1)"><i class="fa fa-font"
+                                aria-hidden="true"></i>-</button>
+                    </div>
                     <label title="change color" class="input-color-label btn">
                         <i class="fa fa-paint-brush" aria-hidden="true"></i>
                         <input class="color-picker btn" type="color" name="text-color"
                             onchange="onChangeColor(this.value)" value="#ff0000">
                     </label>
+                    <div class="alignment-btns">
+                        <button class="align-left" onclick="onAlignText(1)"><i class="fa fa-align-left"
+                                aria-hidden="true"></i></button>
+                        <button class="align-center" onclick="onAlignText(0)"><i class="fa fa-align-center"
+                                aria-hidden="true"></i></button>
+                        <button class="align-right" onclick="onAlignText(-1)"><i class="fa fa-align-right"
+                                aria-hidden="true"></i></button>
+                    </div>
                 </div>
 
                 <section class="data-btns flex justify-center align-center">
@@ -95,8 +105,9 @@
                 <section class="social-links">
                     <ul class="flex clean-list fa-brands">
                         <li><a href="#" class="btn linkedin"></a></li>
-                        <li><a href="#" class="btn facebook"></a></li>
-                        <li><a href="#" class="btn git"></a></li>
+                        <li><a href="https://www.facebook.com/bar.b.shimol" target="_blank" class="btn facebook"></a>
+                        </li>
+                        <li><a href="https://github.com/Barbenshi" target="_blank" class="btn git"></a></li>
                     </ul>
                 </section>
             </section>

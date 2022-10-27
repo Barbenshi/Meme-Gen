@@ -170,6 +170,11 @@ function onAddLine() {
     document.querySelector('input[type=text]').value = ''
 }
 
+function onAlignText(num){
+    alignText(num,gElCanvas.width)
+    renderMeme()
+}
+
 function onGoToGallery() {
     onShowGallery()
     createMeme()
