@@ -113,11 +113,11 @@ function getSelectedLineTxt() {
     return gMeme.lines[gMeme.selectedLineIdx].txt || ''
 }
 
-function canvasClicked(ev) {
+function canvasClicked({ x: clickX, y: clickY }) {
     const clickedLineIdx = gMeme.lines.findIndex(({ pos, width, height }) => {
         // Check if the click coordinates are inside the line coordinates
-        return ev.offsetX > pos.x && ev.offsetX < pos.x + width &&
-            ev.offsetY < pos.y && ev.offsetY > pos.y - height
+        return clickX > pos.x && clickX < pos.x + width &&
+            clickY < pos.y && clickY > pos.y - height
     })
 
     if (clickedLineIdx === -1) return false

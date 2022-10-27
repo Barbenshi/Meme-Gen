@@ -366,13 +366,12 @@ main .img-editor .features {
 main .img-editor .features input[type=text] {
     border: none;
     padding: 0 .325em;
-    font-size: 1.5em;
+    font-size: 1.2em;
     border-radius: 1em;
     box-shadow: -8px 5px 4px;
 }
 
 main .img-editor .features input[type=text]:focus {
-    opacity: 1;
     transform: scale(1);
 }
 

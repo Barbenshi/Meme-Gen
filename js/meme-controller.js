@@ -39,12 +39,6 @@ function renderMeme() {
     }
 }
 
-function resizeCanvas() {
-    // const elCanvasDiv = document.querySelector('.canvas-container')
-    // gElCanvas.width = elCanvasDiv.offsetWidth 
-    // gElCanvas.height = elCanvasDiv.offsetHeight
-}
-
 function drawImageFromLocal() {
 }
 
@@ -85,7 +79,6 @@ function addListeners() {
     addTouchListeners()
     //Listen for resize ev 
     window.addEventListener('resize', () => {
-        resizeCanvas()
         renderMeme()
     })
 }
@@ -103,10 +96,11 @@ function addTouchListeners() {
 }
 
 function onMove(ev) {
+    console.log('moving');
     if (!isLineDragged()) return
+
     const pos = getEvPos(ev)
     console.log('moving text');
-    const idx = getCurrLineIdx()
     //Calc the delta , the diff we moved
     const dx = pos.x - gStartPos.x
     const dy = pos.y - gStartPos.y
@@ -120,8 +114,9 @@ function onMove(ev) {
 }
 
 function onDown(ev) {
-    if (!canvasClicked(ev)) return false
     const pos = getEvPos(ev)
+    if (!canvasClicked(pos)) return false
+    console.log('you touched me');
     gStartPos = pos
     document.querySelector('input[type=text]').value = getSelectedLineTxt()
 
@@ -131,6 +126,7 @@ function onDown(ev) {
 
 function onUp() {
     if (isLineDragged()) leaveLine()
+    console.log('You dont touch me');
     document.body.style.cursor = 'auto'
 }
 

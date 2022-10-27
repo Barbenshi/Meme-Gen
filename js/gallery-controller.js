@@ -18,7 +18,6 @@ function onImgSelect(imgId) {
     setImg(imgId)
     renderMeme()
     onShowEditor()
-    resizeCanvas()
 }
 
 function onShowEditor() {
