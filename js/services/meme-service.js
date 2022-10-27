@@ -9,6 +9,8 @@ var gKeywordSearchCountMap = {
     'baby': 2
 }
 
+var gCanvasHeight
+
 var gMeme
 createMeme()
 
@@ -66,35 +68,88 @@ function resetTextSize(size) {
 }
 
 function removeLine() {
-    if(gMeme.lines.length === 1){
+    if (gMeme.lines.length === 1) {
         createMeme(gMeme.selectedImgId)
         return
     }
     gMeme.lines.splice(gMeme.selectedLineIdx, 1)
-    if(gMeme.selectedLineIdx > 0) gMeme.selectedLineIdx--
-    
+    if (gMeme.selectedLineIdx > 0) gMeme.selectedLineIdx--
+
 }
 
-function addLine(size = 20,txt) {
+function addLine(txt) {
+    const heightSpace = 50
     const line = {
-        txt ,
-        size,
+        txt,
+        size : 30,
         align: 'left',
+        isDragged: false,
+        pos: { x: 20, y: heightSpace },
+        width: 300,
+        height: 30,
+    }
+    
+    if (gMeme.lines.length >= 2) {
+        line.pos.y = heightSpace * gMeme.lines.length
+        line.size = 20
+    } else if (gMeme.lines.length === 1) {
+        line.pos.y = gCanvasHeight - heightSpace
     }
 
     gMeme.lines.push(line)
-    gMeme.selectedLineIdx = gMeme.lines.length-1
+    gMeme.selectedLineIdx = gMeme.lines.length - 1
 }
 
-function createMeme(imgId=1){
+function createMeme(imgId = 1) {
     gMeme = {
         selectedImgId: imgId,
         selectedLineIdx: 0,
         lines: []
     }
-    addLine(30)
+    addLine()
 }
 
-function getSelectedLineTxt(){
+function getSelectedLineTxt() {
     return gMeme.lines[gMeme.selectedLineIdx].txt || ''
 }
+
+function canvasClicked(ev) {
+    const clickedLineIdx = gMeme.lines.findIndex(({ pos, width, height }) => {
+        // Check if the click coordinates are inside the line coordinates
+        return ev.offsetX > pos.x && ev.offsetX < pos.x + width &&
+            ev.offsetY < pos.y && ev.offsetY > pos.y - height
+    })
+
+    if (clickedLineIdx === -1) return false
+    gMeme.selectedLineIdx = clickedLineIdx
+    gMeme.lines[gMeme.selectedLineIdx].isDragged = true
+    return true
+}
+
+function isLineDragged() {
+    return gMeme.lines[gMeme.selectedLineIdx].isDragged
+}
+
+function leaveLine() {
+    gMeme.lines[gMeme.selectedLineIdx].isDragged = false
+}
+
+function getCurrLineIdx() {
+    return gMeme.selectedLineIdx
+}
+
+
+function setLineSizes(idx, width, height) {
+    gMeme.lines[idx].width = width
+    gMeme.lines[idx].height = height
+}
+
+function moveLine(dx, dy) {
+    gMeme.lines[gMeme.selectedLineIdx].pos.x += dx
+    gMeme.lines[gMeme.selectedLineIdx].pos.y += dy
+}
+
+function setCanvasHeight(height = gCanvasHeight){
+    gCanvasHeight = height
+}
+

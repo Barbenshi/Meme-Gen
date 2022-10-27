@@ -7,7 +7,7 @@ var gId = 1
 
 var gImgs = [
     {
-        id: '1a1a1a',
+        id: 55,
         url: 'img/diff-aspect/5.jpg',
         keywords: ['baby', 'win']
     }

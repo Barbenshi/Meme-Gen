@@ -47,40 +47,39 @@
             <div class="canvas-container">
                 <canvas id="c" height="250" width="250" style="border:1px solid black"></canvas>
             </div>
-            <div class="features flex flex-column fa-solid">
+            <div class="features flex flex-column justify-center align-center fa-regular">
                 <button onclick="onGoToGallery()" class="gallery-btn">Go back to Gallery</button>
                 <input type="text" oninput="onSetLineTxt(this.value)" placeholder="Enter your Meme line here">
                 <div class="text-modifiers flex">
-                    <button onclick="onSwitchLineFocus()" class="switch">
-                        <svg viewBox="0 0 512 512">
-                            <path
-                                d="M403.8 34.4c12-5 25.7-2.2 34.9 6.9l64 64c6 6 9.4 14.1 9.4 22.6s-3.4 16.6-9.4 22.6l-64 64c-9.2 9.2-22.9 11.9-34.9 6.9s-19.8-16.6-19.8-29.6V160H352c-10.1 0-19.6 4.7-25.6 12.8L284 229.3 244 176l31.2-41.6C293.3 110.2 321.8 96 352 96h32V64c0-12.9 7.8-24.6 19.8-29.6zM164 282.7L204 336l-31.2 41.6C154.7 401.8 126.2 416 96 416H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H96c10.1 0 19.6-4.7 25.6-12.8L164 282.7zm274.6 188c-9.2 9.2-22.9 11.9-34.9 6.9s-19.8-16.6-19.8-29.6V416H352c-30.2 0-58.7-14.2-76.8-38.4L121.6 172.8c-6-8.1-15.5-12.8-25.6-12.8H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H96c30.2 0 58.7 14.2 76.8 38.4L326.4 339.2c6 8.1 15.5 12.8 25.6 12.8h32V320c0-12.9 7.8-24.6 19.8-29.6s25.7-2.2 34.9 6.9l64 64c6 6 9.4 14.1 9.4 22.6s-3.4 16.6-9.4 22.6l-64 64z" />
-                        </svg>
-                    </button>
-                    <button class="add-btn" onclick="onAddLine()">+</button>
-                    <button class="remove-btn" onclick="onRemoveLine()">-</button>
+                    <button title="Switch focus on line" onclick="onSwitchLineFocus()" class="switch"> <i
+                            class="fa fa-exchange" aria-hidden="true"></i></button>
+                    <button class="add-btn" title="Add new line" onclick="onAddLine()"><i class="fa fa-plus"
+                            aria-hidden="true"></i></button>
+                    <button class="remove-btn" title="Remove current line" onclick="onRemoveLine()"><i
+                            class="fa fa-trash-o" aria-hidden="true"></i></button>
                 </div>
 
                 <div class="text-decorations flex flex-wrap justify-center align-center">
-                    <button onclick="onUpdateFontSize(1)">A+</button>
-                    <button onclick="onUpdateFontSize(-1)">A-</button>
-                    <label class="input-color-label btn">
-                        <svg viewBox="0 0 512 512">
-                            <path
-                                d="M341.6 29.2L240.1 130.8l-9.4-9.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-9.4-9.4L482.8 170.4c39-39 39-102.2 0-141.1s-102.2-39-141.1 0zM55.4 323.3c-15 15-23.4 35.4-23.4 56.6v42.4L5.4 462.2c-8.5 12.7-6.8 29.6 4 40.4s27.7 12.5 40.4 4L89.7 480h42.4c21.2 0 41.6-8.4 56.6-23.4L309.4 335.9l-45.3-45.3L143.4 411.3c-3 3-7.1 4.7-11.3 4.7H96V379.9c0-4.2 1.7-8.3 4.7-11.3L221.4 247.9l-45.3-45.3L55.4 323.3z" />
-                        </svg>
+                    <button title="Bigger font" onclick="onUpdateFontSize(1)"><i class="fa fa-font"
+                            aria-hidden="true"></i>+</button>
+                    <button title="Smaller font" onclick="onUpdateFontSize(-1)"><i class="fa fa-font"
+                            aria-hidden="true"></i>-</button>
+                    <label title="change color" class="input-color-label btn">
+                        <i class="fa fa-paint-brush" aria-hidden="true"></i>
                         <input class="color-picker btn" type="color" name="text-color"
                             onchange="onChangeColor(this.value)" value="#ff0000">
                     </label>
                 </div>
 
                 <section class="data-btns flex justify-center align-center">
-                    <a href="" class="download btn" download="my-file.png" onclick="onDownloadImg(this)">Download</a>
+                    <a href="" title="Download Img" class="download btn" download="my-file.png"
+                        onclick="onDownloadImg(this)"><i class="fa fa-download" aria-hidden="true"></i></a>
                     <div class="share-container">
-                        <a class="btn" onclick="onSaveImg(this)">Save</a>
+                        <a class="btn" title="Upload to cloud and share" onclick="onSaveImg(this)"><i
+                                class="fa fa-cloud" aria-hidden="true"></i></a>
                     </div>
                 </section>
-                    <input type="file" name="upload-img" onchange="onImgInput(event)">
+                <input type="file" name="upload-img" onchange="onImgInput(event)">
                 <div class="user-msg"></div>
             </div>
         </section>
