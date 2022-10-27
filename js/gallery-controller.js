@@ -15,9 +15,10 @@ function renderGallery() {
 }
 
 function onImgSelect(imgId) {
+    gImg = null
     setImg(imgId)
-    renderMeme()
     onShowEditor()
+    renderMeme()
 }
 
 function onShowEditor() {

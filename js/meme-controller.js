@@ -2,6 +2,7 @@
 
 var gElCanvas
 var gCtx
+var gImg
 
 var gStartPos
 const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
@@ -22,27 +23,25 @@ function renderMeme() {
     const { url } = getImg(selectedImgId)
 
     const img = new Image()
-    let imgAspect
+    const currImg = gImg ? gImg : img
     img.src = url
-    img.onload = () => {
-        imgAspect = img.naturalWidth / img.naturalHeight
-        // gElCanvas.width =  300 * imgAspect
-        const elCanvasDiv = document.querySelector('.canvas-container')
-        gElCanvas.width = elCanvasDiv.offsetWidth
-        // gElCanvas.width =  img.width
-        // gElCanvas.height = img.naturalHeight * gElCanvas.width / img.naturalWidth
-        gElCanvas.height = gElCanvas.width * (1 / imgAspect)
-        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-        // gCtx.drawImage(img, 0, 0, img.width, img.height)
-        lines.forEach((line, idx) => drawText(line, idx))
-        drawRect (lines[selectedLineIdx])
-    }
+    img.onload = () => { drawMeme(currImg, lines, selectedLineIdx) }
+}
+
+function drawMeme(img, lines, selectedLineIdx) {
+    const elCanvasDiv = document.querySelector('.canvas-container')
+    const imgAspect = img.naturalWidth / img.naturalHeight
+    gElCanvas.width = elCanvasDiv.offsetWidth
+    gElCanvas.height = gElCanvas.width * (1 / imgAspect)
+    gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+    lines.forEach((line, idx) => drawText(line, idx))
+    drawRect(lines[selectedLineIdx])
 }
 
 function drawImageFromLocal() {
 }
 
-function drawRect({pos, width, height}) {
+function drawRect({ pos, width, height }) {
     console.log(pos, width, height);
     gCtx.beginPath()
     gCtx.strokeStyle = '#ffffff80'
@@ -70,7 +69,7 @@ function drawText({ txt = document.querySelector('.img-editor input[type=text]')
     let txtMetrics = gCtx.measureText(txt)
     let txtWidth = txtMetrics.width
     let txtHeight = txtMetrics.actualBoundingBoxAscent + txtMetrics.actualBoundingBoxDescent;
-    console.log('curr Text Width:',txtWidth);
+    console.log('curr Text Width:', txtWidth);
     setLineSizes(idx, txtWidth, txtHeight)
 }
 
@@ -166,8 +165,8 @@ function onAddLine() {
     document.querySelector('input[type=text]').value = ''
 }
 
-function onAlignText(num){
-    alignText(num,gElCanvas.width)
+function onAlignText(num) {
+    alignText(num, gElCanvas.width)
     renderMeme()
 }
 
@@ -185,12 +184,14 @@ function onSaveImg() {
     uploadImg()
 }
 
-function onImgInput(ev) {
-    loadImageFromInput(ev, cb)
+function onImgInput(ev,elInput) {
+    loadImageFromInput(ev, setLocalImg)
+    console.log(elInput.value);
+    elInput.value = ''
 }
 
 // CallBack func will run on success load of the img
-function loadImageFromInput(ev, drawImage) {
+function loadImageFromInput(ev, onImageReady) {
     const reader = new FileReader()
     // After we read the file
     reader.onload = function (event) {
@@ -204,8 +205,9 @@ function loadImageFromInput(ev, drawImage) {
     reader.readAsDataURL(ev.target.files[0]) // Read the file we picked
 }
 
-function drawImage(img) {
-    gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+function setLocalImg(img) {
+    gImg = img
+    renderMeme()
 }
 
 function getEvPos(ev) {
