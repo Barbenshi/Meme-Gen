@@ -24,9 +24,12 @@ function renderMeme() {
     img.src = url
     img.onload = () => {
         imgAspect = img.naturalWidth / img.naturalHeight
-        gElCanvas.width =  300 * imgAspect
+        // gElCanvas.width =  300 * imgAspect
+        const elCanvasDiv = document.querySelector('.canvas-container')
+        gElCanvas.width = elCanvasDiv.offsetWidth 
+        // gElCanvas.width =  img.width
         // gElCanvas.height = img.naturalHeight * gElCanvas.width / img.naturalWidth
-        gElCanvas.height = 300
+        gElCanvas.height =  gElCanvas.width * (1/imgAspect)
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
         // gCtx.drawImage(img, 0, 0, img.width, img.height)
         drawText(line)
@@ -42,9 +45,12 @@ function resizeCanvas() {
 function drawImageFromLocal() {
 }
 
-function drawText({ txt = document.querySelector('input').placeholder, size = 20, align = 'center', color = 'white' }) {
+function drawText({ txt = document.querySelector('input').placeholder, size = 20, align = 'center', color = 'white' , strokeColor = 'black' }) {
     gCtx.lineWidth = 2
-    gCtx.strokeStyle = 'black'
+    // while (txtWidth > gElCanvas.width){
+    //     size = 
+    // }
+    gCtx.strokeStyle = strokeColor
     gCtx.fillStyle = color
     let y = 40
 
@@ -66,6 +72,15 @@ function drawText({ txt = document.querySelector('input').placeholder, size = 20
     }
 
     gCtx.font = `${size}px Impact`
+    let txtWidth = gCtx.measureText(txt).width
+    if(txtWidth > gElCanvas.width) {
+        size = 10
+        txtWidth = gCtx.measureText(txt).width
+    }
+
+    gCtx.font = `${size}px Impact`
+    console.log(txtWidth);
+
     gCtx.fillText(txt, x, y) // Draws (fills) a given text at the given (x, y) position.
     gCtx.strokeText(txt, x, y) // Draws (strokes) a given text at the given (x, y) position.
 }
@@ -112,3 +127,5 @@ function onSwitchLineFocus() {
     switchLineFocus()
     renderMeme()
 }
+
+

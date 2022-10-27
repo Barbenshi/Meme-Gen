@@ -32,6 +32,7 @@
     <header class="secondary-header full main-layout">
         <div class="content-container flex space-between">
             <input type="search" name="img-search" placeholder="🔍Search here...">
+            <button class="flexible" onclick="onGenerateRandomMeme(this)"> I'm Flexible</button>
             <p>most Common Words</p>
         </div>
     </header>
@@ -42,7 +43,7 @@
             <article><img src="img/1.jpg" alt=""></article>
         </section>
 
-        <section class="img-editor flex flex-column align-center hide">
+        <section class="img-editor flex-column align-center hide">
             <div class="canvas-container">
                 <canvas id="c" height="250" width="250" style="border:1px solid black"></canvas>
             </div>
@@ -99,7 +100,8 @@
         <small>All Coffee Rights Comes Here</small>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="js/services/storage-service.js"></script>
+    <script src="js/services/util-service.js"></script>
     <script src="js/services/meme-service.js"></script>
     <script src="js/services/gallery-service.js"></script>
     <script src="js/gallery-controller.js"></script>

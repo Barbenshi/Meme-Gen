@@ -1,23 +1,33 @@
 'use strict'
 
+const KEY_WORDS = [['funny', 'politics'], [['cute', 'animals']], ['cute', 'couples', 'dogs'], ['lazy', 'cats', 'sunday morning'], ['baby', 'win'], ['smart', 'clumzy'], ['baby', 'surprised'], ['not interested', 'You are Right'],
+['evil', 'laugh'], ['politics', 'success'], ['wrestling', 'love'], ['saint', 'tv', 'see you try'], ['leonardo', 'cheers'],
+['exterminator'], ['smart', 'funny'], ['star wars', 'science fiction'], ['politics', 'evil'], ['movies', 'smart']]
+var gId = 1
+
 var gImgs = [
     {
-        id: 1,
+        id: '1a1a1a',
         url: 'img/diff-aspect/5.jpg',
-        keywords: ['funny', 'politics']
+        keywords: ['baby', 'win']
     }
 ]
 
-function getImgs(){
+function getImgs() {
     return gImgs
 }
 
-function createImg(id,url,keywords){
+function createImg(url, keywords) {
     gImgs.push({
-        id,
+        id: gId++,
         url,
         keywords
     })
 }
 
-createImg(2,'img/2.jpg',['cute','animals'])
+createImgs()
+// createImg('img/1.jpg', ['funny', 'politics'])
+
+function createImgs() {
+    KEY_WORDS.forEach(keyword => createImg(`img/${gId}.jpg`, keyword))
+}

@@ -1,5 +1,8 @@
 'use strict'
 
+const WORDS = ['baby','devil','Bibi','Tibi','steal','run','court','magnificent','jungle','god',
+'fear','love','hate','happiness','world']
+
 var gKeywordSearchCountMap = {
     'funny': 12,
     'cat': 16,
@@ -15,9 +18,9 @@ var gMeme = {
     lines: [
         {
             txt: 'I sometimes eat Falafel',
-            size: 20,
+            size: 40,
             align: 'left',
-            color: 'red'
+            color: 'white'
         },
 
         {
@@ -55,5 +58,17 @@ function updateFontSize(num) {
 
 function switchLineFocus() {
     gMeme.selectedLineIdx = gMeme.lines.length-1 === gMeme.selectedLineIdx ? 0 : gMeme.selectedLineIdx + 1
+}
+
+function generateRandomMeme(){
+    const randomImgId = gImgs[getRandomIntInclusive(0,gImgs.length-1)].id
+    gMeme.selectedImgId = randomImgId
+    gMeme.lines.forEach(line=>{
+        line.color = getRandomColor()
+        line.strokeColor = getRandomColor()
+        line.size = getRandomIntInclusive(5,40)
+        line.txt = WORDS.reduce((acc,word)=> acc + WORDS[getRandomIntInclusive(0,14)] + ' ' ,'')
+        line.txt = line.txt.charAt(0).toUpperCase() + line.txt.substring(1)
+    })
 }
 
