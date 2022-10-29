@@ -1,6 +1,6 @@
 'use strict'
 
-const KEY_WORDS = [['funny', 'politics'], [['cute', 'animals']], ['cute', 'couples', 'dogs'], ['lazy', 'cats', 'sunday morning'], ['baby', 'win'], ['smart', 'clumzy'], ['baby', 'surprised'], ['not interested', 'You are Right'],
+const KEY_WORDS = [['funny', 'politics'], ['cute', 'animals'], ['cute', 'couples', 'dogs'], ['lazy', 'cats', 'sunday morning'], ['baby', 'win'], ['smart', 'clumzy'], ['baby', 'surprised'], ['not interested', 'You are Right'],
 ['evil', 'laugh'], ['politics', 'success'], ['wrestling', 'love'], ['saint', 'tv', 'see you try'], ['leonardo', 'cheers'],
 ['exterminator'], ['smart', 'funny'], ['star wars', 'science fiction'], ['politics', 'evil'], ['movies', 'smart'], ['funny', 'politics'], [['cute', 'animals']], ['cute', 'couples', 'dogs'], ['lazy', 'cats', 'sunday morning'], ['baby', 'win'], ['smart', 'clumzy'], ['baby', 'surprised'], ['not interested', 'You are Right'],
 ['evil', 'laugh'], ['politics', 'success'], ['wrestling', 'love'], ['saint', 'tv', 'see you try'], ['leonardo', 'cheers'],
@@ -25,19 +25,16 @@ function createImg(url, keywords = ['funny, silly']) {
     })
 }
 
-
 function createImgs() {
     KEY_WORDS.forEach(keyword => createImg(`img/diff-aspect/${gId}.jpg`, keyword))
 }
 
 function getImgsForDisplay() {
-    //Todo filter, paging
     gImgsForDisplay = gImgs
     // Filter
     if (gFilterBy) {
         gImgsForDisplay = gImgsForDisplay.filter(({ keywords }) => keywords.find(keyword => keyword.includes(gFilterBy.toLowerCase())))
     }
-
 
     // Paging:
     const startIdx = gPageIdx * PAGE_SIZE

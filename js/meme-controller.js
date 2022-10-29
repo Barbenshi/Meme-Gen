@@ -16,8 +16,6 @@ function onEditorInit() {
     renderMeme()
 }
 
-
-
 function renderMeme() {
     const { lines, selectedImgId, selectedLineIdx } = getMeme()
     const { url } = getImg(selectedImgId)
@@ -26,6 +24,7 @@ function renderMeme() {
     const currImg = gImg ? gImg : img
     img.src = url
     img.onload = () => { drawMeme(currImg, lines, selectedLineIdx) }
+
 }
 
 function drawMeme(img, lines, selectedLineIdx) {
@@ -38,38 +37,25 @@ function drawMeme(img, lines, selectedLineIdx) {
     if (isLineFocused()) drawRect(lines[selectedLineIdx])
 }
 
-function drawImageFromLocal() {
-}
-
 function drawRect({ pos, width, height }) {
-    console.log(pos, width, height);
     gCtx.beginPath()
     gCtx.strokeStyle = '#ffffff80'
     gCtx.strokeRect(pos.x - 10, pos.y - height - 10, width + 20, height + 20)
     gCtx.stroke()
 }
 
-function drawText({ txt = document.querySelector('.img-editor input[type=text]').placeholder, size = 20, align = 'center', color = 'white', strokeColor = 'black', pos }, idx) {
+function drawText({ txt = document.querySelector('.img-editor input[type=text]').placeholder, size = 20, color = 'white', strokeColor = 'black', pos, font }, idx) {
     gCtx.lineWidth = 2
     gCtx.strokeStyle = strokeColor
     gCtx.fillStyle = color
-    // gCtx.font = `${size}px Impact`
+    gCtx.font = `${size}px ${font}`
 
-    // let txtHeight = txtMetrics.fontBoundingBoxAscent + txtMetrics.fontBoundingBoxDescent;
-
-    // if ((txtWidth + pos.x) >= gElCanvas.width && gElCanvas.width > 0) {
-    //     size = 20
-    //     resetTextSize(size)
-    // }
-    gCtx.font = `${size}px Impact`
-
-    gCtx.fillText(txt, pos.x, pos.y) // Draws (fills) a given text at the given (x, y) position.
-    gCtx.strokeText(txt, pos.x, pos.y) // Draws (strokes) a given text at the given (x, y) position.
+    gCtx.fillText(txt, pos.x, pos.y)
+    gCtx.strokeText(txt, pos.x, pos.y)
 
     let txtMetrics = gCtx.measureText(txt)
     let txtWidth = txtMetrics.width
     let txtHeight = txtMetrics.actualBoundingBoxAscent + txtMetrics.actualBoundingBoxDescent;
-    console.log('curr Text Width:', txtWidth);
     setLineSizes(idx, txtWidth, txtHeight)
 }
 
@@ -77,9 +63,17 @@ function addListeners() {
     addMouseListeners()
     addTouchListeners()
     //Listen for resize ev 
-    window.addEventListener('resize', () => {
-        renderMeme()
-    })
+    window.addEventListener('resize', renderMeme)
+
+    //Listen for writing on canvas
+    window.addEventListener('keyup', handleKeyUp)
+}
+
+function handleKeyUp(ev) {
+    if (!isLineFocused()) return
+    addLetter(ev.key)
+    renderMeme()
+    setInputText()
 }
 
 function addMouseListeners() {
@@ -125,7 +119,6 @@ function onUp() {
     document.body.style.cursor = 'grab'
 }
 
-
 function onSetLineTxt(txt) {
     setLineTxt(txt)
     renderMeme()
@@ -153,9 +146,9 @@ function onRemoveLine() {
     setInputText()
 }
 
-function onAddLine() {
+function onAddLine(txt, size) {
     setCanvasHeight(gElCanvas.height)
-    addLine()
+    addLine(txt, size)
     renderMeme()
     setInputText()
 }
@@ -181,12 +174,13 @@ function onDownloadImg(elLink) {
 }
 
 function onSaveImg() {
+    removeFocus()
+    renderMeme()
     uploadImg()
 }
 
 function onImgInput(ev, elInput) {
     loadImageFromInput(ev, setLocalImg)
-    console.log(elInput.value);
     elInput.value = ''
 }
 
@@ -236,7 +230,20 @@ function getEvPos(ev) {
 function onSaveMeme() {
     uploadImg()
     const url = document.querySelector('.upload-link')
-    console.log(url);
     saveMeme(url)
     renderSavedMemes()
+}
+
+function onSetFont(font) {
+    setFont(font)
+    renderMeme()
+}
+
+function onShowGallery() {
+    document.querySelector('.gallery-container').classList.remove('hide')
+    document.querySelector('.img-editor').classList.add('hide')
+    document.querySelector('.main-footer').classList.remove('hide')
+    document.querySelector('button.flexible').classList.remove('hide')
+    document.querySelector('.memes').classList.add('hide')
+    document.body.classList.remove('menu-open')
 }

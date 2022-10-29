@@ -14,7 +14,7 @@ function uploadImg() {
           `
       // Create a link that on click will make a post in facebook with the image we uploaded
       document.querySelector('.share-container').innerHTML = `
-          <a class="btn fa-brands share" href="https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
+          <a class="btn fa-brands facebook share" href="https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
              Share   
           </a>
           `
@@ -41,7 +41,6 @@ function uploadImg() {
   
       // If the response is ok, call the onSuccess callback function, 
       // that will create the link to facebook using the url we got
-      console.log('Got back live url:', url)
       onSuccess(url)
     }
     XHR.onerror = (req, ev) => {

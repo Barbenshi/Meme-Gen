@@ -4,11 +4,9 @@
 
 function renderSavedMemes() {
     const savedMemes = getSavedMemes()
-    console.log(savedMemes);
     const strHtmls = savedMemes.map((meme) => {
         const img = getImg(meme.selectedImgId)
         const { url, id } = img
-        console.log(url);
         return `
     <article>
     <img src=${url} alt="meme-img"
@@ -16,7 +14,6 @@ function renderSavedMemes() {
     </article>
     `
     })
-    console.log(strHtmls);
     document.querySelector('.memes').innerHTML = strHtmls.join('')
 }
 

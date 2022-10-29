@@ -17,6 +17,40 @@ var gCanvasHeight
 var gMeme
 createMeme()
 
+function createMeme(imgId = 1) {
+    gMeme = {
+        id: makeId(),
+        selectedImgId: imgId,
+        selectedLineIdx: 0,
+        lines: []
+    }
+    addLine()
+}
+
+function addLine(txt,size=30) {
+    const heightSpace = 50
+    const line = {
+        txt,
+        size,
+        align: 'left',
+        isDragged: false,
+        pos: { x: 20, y: heightSpace },
+        width: 300,
+        height: 30,
+        isFocused: true,
+        font : 'Impact',
+    }
+
+    if (gMeme.lines.length >= 2) {
+        line.pos.y = heightSpace * gMeme.lines.length
+    } else if (gMeme.lines.length === 1) {
+        line.pos.y = gCanvasHeight - heightSpace
+    }
+
+    gMeme.lines.push(line)
+    gMeme.selectedLineIdx = gMeme.lines.length - 1
+}
+
 function getMeme() {
     return gMeme
 }
@@ -47,24 +81,32 @@ function switchLineFocus() {
 }
 
 function generateRandomMeme() {
+    createMeme()
+    let linesNum = getRandomIntInclusive(0, 2)
+    for (let i = 0; i < linesNum; i++) {
+        addLine()
+    }
+
+    const lineHeight = 50
     const randomImgId = gImgs[getRandomIntInclusive(0, gImgs.length - 1)].id
     gMeme.selectedImgId = randomImgId
-    gMeme.lines.forEach(line => {
+    gMeme.lines.forEach((line, lineIdx) => {
         let i = 0
         line.color = getRandomColor()
         line.strokeColor = getRandomColor()
-        line.size = getRandomIntInclusive(5, 40)
+        line.size = getRandomIntInclusive(10, 40)
         line.txt = ''
         while (i < 5) {
             line.txt += WORDS[getRandomIntInclusive(0, 14)] + ' '
             i++
         }
         line.txt = line.txt.charAt(0).toUpperCase() + line.txt.substring(1)
+        // //TODO change substring to 1 if I want all 15 letters, too much space
         // line.txt = WORDS.reduce((acc,word)=> acc + WORDS[getRandomIntInclusive(0,14)] + ' ' ,'')
         // line.txt = line.txt.charAt(0).toUpperCase() + line.txt.substring(1)
-        // //TODO change substring to 1 if I want all 15 letters, too much space
+        
+        line.pos.y = lineHeight * (lineIdx + 1)
     })
-    console.log(gMeme);
 }
 
 function resetTextSize(size) {
@@ -77,42 +119,9 @@ function removeLine() {
         return
     }
     gMeme.lines.splice(gMeme.selectedLineIdx, 1)
-    if (gMeme.selectedLineIdx > 0) gMeme.selectedLineIdx--
-
-}
-
-function addLine(txt) {
-    const heightSpace = 50
-    const line = {
-        txt,
-        size: 30,
-        align: 'left',
-        isDragged: false,
-        pos: { x: 20, y: heightSpace },
-        width: 300,
-        height: 30,
-        isFocused: false,
+    if (gMeme.selectedLineIdx > 0) {
+        gMeme.selectedLineIdx--
     }
-
-    if (gMeme.lines.length >= 2) {
-        line.pos.y = heightSpace * gMeme.lines.length
-        line.size = 20
-    } else if (gMeme.lines.length === 1) {
-        line.pos.y = gCanvasHeight - heightSpace
-    }
-
-    gMeme.lines.push(line)
-    gMeme.selectedLineIdx = gMeme.lines.length - 1
-}
-
-function createMeme(imgId = 1) {
-    gMeme = {
-        id: makeId(),
-        selectedImgId: imgId,
-        selectedLineIdx: 0,
-        lines: []
-    }
-    addLine()
 }
 
 function getSelectedLineTxt() {
@@ -130,9 +139,7 @@ function canvasClicked({ x: clickX, y: clickY }) {
     gMeme.selectedLineIdx = clickedLineIdx
     gMeme.lines[gMeme.selectedLineIdx].isFocused = true
     if (gMeme.lines[gMeme.selectedLineIdx].isFocused) gMeme.lines[gMeme.selectedLineIdx].isDragged = true
-    console.log(`focusssss = `, gMeme.lines[gMeme.selectedLineIdx].isFocused)
     gMeme.lines[gMeme.selectedLineIdx].isFocused
-    console.log('im clicked');
 }
 
 function isLineDragged() {
@@ -143,6 +150,10 @@ function isLineFocused() {
     return gMeme.lines[gMeme.selectedLineIdx].isFocused
 }
 
+function removeFocus(){
+    gMeme.lines[gMeme.selectedLineIdx].isFocused = false
+}
+
 function leaveLine() {
     gMeme.lines[gMeme.selectedLineIdx].isDragged = false
 }
@@ -150,7 +161,6 @@ function leaveLine() {
 function getCurrLineIdx() {
     return gMeme.selectedLineIdx
 }
-
 
 function setLineSizes(idx, width, height) {
     gMeme.lines[idx].width = width
@@ -179,11 +189,9 @@ function saveMeme(url) {
     _saveMemesToLocalStorage()
 }
 
-
 function _saveMemesToLocalStorage() {
     saveToStorage(STORAGE_KEY, gSavedMemes)
 }
-
 
 function loadMemesFromLocalStorage() {
     gSavedMemes = loadFromStorage(STORAGE_KEY) || []
@@ -199,4 +207,13 @@ function getMemeById(memeId) {
 
 function setMeme(meme) {
     gMeme = meme
+}
+
+function setFont(font){
+    gMeme.lines[gMeme.selectedLineIdx].font = font
+}
+
+function addLetter(letter){
+    if (!gMeme.lines[gMeme.selectedLineIdx].txt) gMeme.lines[gMeme.selectedLineIdx].txt = ''
+    gMeme.lines[gMeme.selectedLineIdx].txt += letter
 }

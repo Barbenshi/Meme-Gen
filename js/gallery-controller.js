@@ -1,6 +1,5 @@
 'use strict'
 
-
 function onGalleryInit(){
     renderGallery()
     getPaginationNumbers()
@@ -15,17 +14,14 @@ function renderGallery() {
     onclick="onImgSelect(${id})" data-id="${id}" class="gallery-image">
     </article>
     `)
-
-
     document.querySelector('.img-gallery').innerHTML = strHtmls.join('')
 }
 
 function onImgSelect(imgId) {
-    onEditorInit()
     gImg = null
     setImg(imgId)
+    onEditorInit()
     onShowEditor()
-    renderMeme()
 }
 
 function onShowEditor() {
@@ -36,15 +32,6 @@ function onShowEditor() {
     document.querySelector('.memes').classList.add('hide')
 }
 
-function onShowGallery() {
-    document.querySelector('.gallery-container').classList.remove('hide')
-    document.querySelector('.img-editor').classList.add('hide')
-    document.querySelector('.main-footer').classList.remove('hide')
-    document.querySelector('button.flexible').classList.remove('hide')
-    document.querySelector('.memes').classList.add('hide')
-    document.body.classList.remove('menu-open')
-}
-
 function onShowAbout() {
     document.querySelector('.main-footer').classList.remove('hide')
     document.body.classList.remove('menu-open')
@@ -52,7 +39,7 @@ function onShowAbout() {
 
 function onGenerateRandomMeme(elBtn) {
     generateRandomMeme()
-    renderMeme()
+    onEditorInit()
     onShowEditor()
     elBtn.classList.add('hide')
 }
