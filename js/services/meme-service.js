@@ -192,7 +192,6 @@ function alignText(num, canvasWidth) {
 function saveMeme(url) {
     createSavedImg(url)
     gSavedMemes.push(gMeme)
-    gMeme.lines[gMeme.selectedLineIdx].txt = ''
     _saveMemesToLocalStorage()
 }
 

@@ -19,7 +19,7 @@ function renderGallery() {
 
 function onImgSelect(imgId) {
     gImg = null
-    setImg(imgId)
+    createMeme(imgId)
     onEditorInit()
     onShowEditor()
 }
