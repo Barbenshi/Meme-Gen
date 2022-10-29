@@ -137,6 +137,19 @@ button,
     content: " → ";
 }
 
+button.active{
+    background-color: var(--clr3);
+}
+
+button:disabled{
+    background-color: var(--clr3);
+    cursor: not-allowed;
+}
+
+button:hover{
+    opacity: 70%;
+}
+
 
 
 /* HELPERS */
@@ -345,6 +358,7 @@ main .img-gallery {
 
 main .img-gallery article {
     box-shadow: -4px 0px 7px 0px;
+    cursor: pointer;
 }
 
 main .img-gallery img {

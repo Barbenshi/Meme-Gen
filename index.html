@@ -21,6 +21,7 @@
             <nav class="main-nav">
                 <ul class="flex clean-list">
                     <li><a href="#" onclick="onShowGallery()">Gallery</a></li>
+                    <li><a href="#" onclick="onShowMemes()">Memes</a></li>
                     <li><a href="#about" onclick="onShowAbout()">About</a></li>
                 </ul>
             </nav>
@@ -39,8 +40,16 @@
 
     <main class="full main-layout">
 
-        <section class="img-gallery grid-container">
-            <article><img src="img/1.jpg" alt=""></article>
+        <section class="gallery-container">
+            <div class="img-gallery grid-container">
+                <article><img src="img/1.jpg" alt=""></article>
+            </div>
+
+            <div class="pagination flex justify-center align-center">
+                <button class="btn-prev" onclick="onUpdatePage(-1)">Prev</button>
+                <div class="pagination-numbers flex justify-center align-center"></div>
+                <button class="btn-next" onclick="onUpdatePage(1)">Next</button>
+            </div>
         </section>
 
         <section class="img-editor flex-column align-center hide">
@@ -84,6 +93,7 @@
                 <section class="data-btns flex justify-center align-center">
                     <a href="" title="Download Img" class="download btn" download="my-file.png"
                         onclick="onDownloadImg(this)"><i class="fa fa-download" aria-hidden="true"></i></a>
+                    <!-- <button class="save-meme" onclick="onSaveMeme()">Save</button> -->
                     <div class="share-container">
                         <a class="btn" title="Upload to cloud and share" onclick="onSaveImg(this)"><i
                                 class="fa fa-cloud" aria-hidden="true"></i></a>
@@ -92,6 +102,10 @@
                 <input type="file" name="upload-img" onchange="onImgInput(event,this)">
                 <div class="user-msg"></div>
             </div>
+        </section>
+
+        <section class="memes hide">
+            No Memes Created Yet
         </section>
     </main>
 
@@ -125,6 +139,8 @@
     <script src="js/services/util-service.js"></script>
     <script src="js/services/meme-service.js"></script>
     <script src="js/services/gallery-service.js"></script>
+    <script src="js/services/saved-memes-service.js"></script>
+    <script src="js/saved-memes-controller.js"></script>
     <script src="js/gallery-controller.js"></script>
     <script src="js/meme-controller.js"></script>
     <script src="js/main.js"></script>

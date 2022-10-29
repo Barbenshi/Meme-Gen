@@ -9,6 +9,9 @@ var gKeywordSearchCountMap = {
     'baby': 2
 }
 
+var gSavedMemes = []
+const STORAGE_KEY = 'savedMemes'
+
 var gCanvasHeight
 
 var gMeme
@@ -19,7 +22,7 @@ function getMeme() {
 }
 
 function getImg(imgId) {
-    return gImgs.find(({ id }) => id === imgId)
+    return gImgs.find(({ id }) => id === imgId) || gSavedImgs.find(({ id }) => id === imgId)
 }
 
 function setLineTxt(txt) {
@@ -102,6 +105,7 @@ function addLine(txt) {
 
 function createMeme(imgId = 1) {
     gMeme = {
+        id: makeId(),
         selectedImgId: imgId,
         selectedLineIdx: 0,
         lines: []
@@ -159,3 +163,31 @@ function alignText(num, canvasWidth) {
     else gMeme.lines[gMeme.selectedLineIdx].pos.x = canvasWidth / 2 - gMeme.lines[gMeme.selectedLineIdx].width / 2
 }
 
+function saveMeme(url) {
+    const imgId = createSavedImg(url)
+    gMeme.selectedImgId = imgId
+    gSavedMemes.push(gMeme)
+    _saveMemesToLocalStorage()
+}
+
+
+function _saveMemesToLocalStorage() {
+    saveToStorage(STORAGE_KEY, gSavedMemes)
+}
+
+
+function loadMemesFromLocalStorage() {
+    gSavedMemes = loadFromStorage(STORAGE_KEY) || []
+}
+
+function getSavedMemes() {
+    return gSavedMemes
+}
+
+function getMemeById(memeId) {
+    return gSavedMemes.find(({ id }) => id === memeId)
+}
+
+function setMeme(meme) {
+    gMeme = meme
+}

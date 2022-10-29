@@ -7,11 +7,11 @@ var gImg
 var gStartPos
 const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
-function onInit() {
+function onEditorInit() {
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
-    renderGallery()
 
+    loadMemesFromLocalStorage()
     addListeners()
     renderMeme()
 }
@@ -232,3 +232,11 @@ function getEvPos(ev) {
     return pos
 }
 
+
+function onSaveMeme(){
+    uploadImg()
+    const url = document.querySelector('.upload-link')
+    console.log(url);
+    saveMeme(url)
+    renderSavedMemes()
+}
