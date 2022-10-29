@@ -170,7 +170,7 @@ function onGoToGallery() {
     resetShareButton()
 }
 
-function resetShareButton(){
+function resetShareButton() {
     const elShareContainer = document.querySelector('.share-container')
     const str = `<a class="btn" title="Upload to cloud and share" onclick="onSaveImg(this)"><i
     class="fa fa-cloud" aria-hidden="true"></i></a>`
@@ -187,15 +187,12 @@ function onDownloadImg(elLink) {
 }
 
 function onSaveImg() {
+    uploadImg()
+    const imgData = gElCanvas.toDataURL('image/jpeg')
+    saveMeme(imgData)
     removeFocus()
     renderMeme()
-    uploadImg()
-    setTimeout(() => {
-        const elLink = document.querySelector('.upload-link')
-        console.log(elLink.href);
-        saveMeme(elLink.href)
-        renderSavedMemes()
-    }, 1000);
+    renderSavedMemes()
 }
 
 function onImgInput(ev, elInput) {

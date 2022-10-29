@@ -1,7 +1,7 @@
 'use strict'
+const IMG_STORAGE_KEY = 'imgsDB'
 
-
-var gSavedImgs = []
+var gSavedImgs = loadFromStorage(IMG_STORAGE_KEY) || []
 
 function getSavedImgs() {
     return gSavedImgs
@@ -9,8 +9,12 @@ function getSavedImgs() {
 
 function createSavedImg(url) {
     gSavedImgs.push({
-        id: gId++,
+        id: makeId(),
         url,
     })
-    return gSavedImgs[gSavedImgs.length - 1].id
+    _saveImgsToLocalStorage()
+}
+
+function _saveImgsToLocalStorage() {
+    saveToStorage(IMG_STORAGE_KEY, gSavedImgs)
 }

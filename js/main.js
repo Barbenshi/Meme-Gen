@@ -2,6 +2,7 @@
 
 function onInit(){
     onGalleryInit()
+    renderSavedMemes()
 }
 
 function onToggleMenu(){

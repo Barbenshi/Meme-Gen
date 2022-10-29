@@ -4,10 +4,10 @@
 
 function renderSavedMemes() {
     const savedMemes = getSavedMemes()
-    const strHtmls = savedMemes.map((meme) => {
-        const img = getImg(meme.selectedImgId)
-        const { url, id } = img
-        console.log(url);
+    if (!savedMemes) return
+    const strHtmls = savedMemes.map((meme, idx) => {
+        console.log(gSavedImgs[idx]);
+        const { url, id } = gSavedImgs[idx]
         return `
     <article>
     <img src="${url}" alt="meme-img"    
@@ -18,11 +18,11 @@ function renderSavedMemes() {
     document.querySelector('.memes').innerHTML = strHtmls.join('')
 }
 
-function onSavedImgSelect(memeId){
+function onSavedImgSelect(memeId) {
     const meme = getMemeById(memeId)
     setMeme(meme)
-    onShowEditor()
     renderMeme()
+    onShowEditor()
 }
 
 

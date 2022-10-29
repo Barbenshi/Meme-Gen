@@ -11,8 +11,9 @@ var gKeywordSearchCountMap = {
 
 var gPhrase
 
-var gSavedMemes = []
 const STORAGE_KEY = 'savedMemes'
+var gSavedMemes
+loadMemesFromLocalStorage()
 
 var gCanvasHeight
 
@@ -57,8 +58,12 @@ function getMeme() {
     return gMeme
 }
 
+function getSavedImg(imgId) {
+    return gSavedImgs.find(({ id }) => id === imgId)
+}
+
 function getImg(imgId) {
-    return gImgs.find(({ id }) => id === imgId) || gSavedImgs.find(({ id }) => id === imgId)
+    return gImgs.find(({ id }) => id === imgId)
 }
 
 function setLineTxt(txt) {
@@ -185,9 +190,9 @@ function alignText(num, canvasWidth) {
 }
 
 function saveMeme(url) {
-    const imgId = createSavedImg(url)
-    gMeme.selectedImgId = imgId
+    createSavedImg(url)
     gSavedMemes.push(gMeme)
+    gMeme.lines[gMeme.selectedLineIdx].txt = ''
     _saveMemesToLocalStorage()
 }
 
@@ -215,8 +220,8 @@ function setFont(font) {
     gMeme.lines[gMeme.selectedLineIdx].font = font
 }
 
-function updatePhrase(char){
+function updatePhrase(char) {
     if (!gMeme.lines[gMeme.selectedLineIdx].txt) return gPhrase = char
-    char !== 'DEL' ? gPhrase += char : gPhrase = gPhrase.substring(0,gPhrase.length-2)
+    char !== 'DEL' ? gPhrase += char : gPhrase = gPhrase.substring(0, gPhrase.length - 2)
     return gPhrase
 }
