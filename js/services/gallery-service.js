@@ -6,11 +6,15 @@ const KEY_WORDS = [['funny', 'politics'], [['cute', 'animals']], ['cute', 'coupl
 ['evil', 'laugh'], ['politics', 'success'], ['wrestling', 'love'], ['saint', 'tv', 'see you try'], ['leonardo', 'cheers'],
 ['exterminator'], ['smart', 'funny'], ['star wars', 'science fiction'], ['politics', 'evil'], ['movies', 'smart'], ['funny', 'politics'], [['cute', 'animals']], ['cute', 'couples', 'dogs'], ['lazy', 'cats', 'sunday morning'], ['baby', 'win'], ['smart', 'clumzy'], ['baby', 'surprised'], ['not interested', 'You are Right'],
 ['evil', 'laugh'], ['politics', 'success'], ['smart', 'funny']]
-var gId = 1
-
-var gImgs = []
-var gPageIdx = 0
 const PAGE_SIZE = 12
+var gPageIdx = 0
+
+var gId = 1
+var gImgs = []
+
+var gFilterBy
+var gImgsForDisplay
+
 createImgs()
 
 function createImg(url, keywords = ['funny, silly']) {
@@ -28,15 +32,17 @@ function createImgs() {
 
 function getImgsForDisplay() {
     //Todo filter, paging
-    let imgs = gImgs
+    gImgsForDisplay = gImgs
     // Filter
-
+    if (gFilterBy) {
+        gImgsForDisplay = gImgsForDisplay.filter(({ keywords }) => keywords.find(keyword => keyword.includes(gFilterBy.toLowerCase())))
+    }
 
 
     // Paging:
     const startIdx = gPageIdx * PAGE_SIZE
-    imgs = imgs.slice(startIdx, startIdx + PAGE_SIZE)
-    return imgs
+    gImgsForDisplay = gImgsForDisplay.slice(startIdx, startIdx + PAGE_SIZE)
+    return gImgsForDisplay
 }
 
 function isFirstPage() {
@@ -63,5 +69,8 @@ function getPageCount() {
     return Math.ceil(gImgs.length / PAGE_SIZE)
 }
 
+function setFilter(filter) {
+    gFilterBy = filter
+}
 
 

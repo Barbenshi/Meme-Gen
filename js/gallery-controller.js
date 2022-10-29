@@ -2,9 +2,9 @@
 
 
 function onGalleryInit(){
+    renderGallery()
     getPaginationNumbers()
     handlePagination()
-    renderGallery()
 }
 
 function renderGallery() {
@@ -67,8 +67,8 @@ function onShowMemes() {
 
 function onUpdatePage(num) {
     updatePage(num)
-    handlePagination()
     renderGallery()
+    handlePagination()
 }
 
 function appendPageNumber(index) {
@@ -90,8 +90,8 @@ function getPaginationNumbers() {
 function onSetPage() {
     const page = this.getAttribute('page-index')
     setPage(page)
-    handlePagination()
     renderGallery()
+    handlePagination()
 }
 
 function handlePagination(){
@@ -107,4 +107,9 @@ function handlePagination(){
     elBtns.forEach(button => button.classList.remove('active'))
     const currPage = document.querySelector(`[page-index="${getCurrPage()}"]`)
     currPage.classList.add('active')
+}
+
+function onSetFilter(filter){
+    setFilter(filter)
+    renderGallery()
 }

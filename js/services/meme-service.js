@@ -43,6 +43,7 @@ function updateFontSize(num) {
 
 function switchLineFocus() {
     gMeme.selectedLineIdx = gMeme.lines.length - 1 === gMeme.selectedLineIdx ? 0 : gMeme.selectedLineIdx + 1
+    gMeme.lines[gMeme.selectedLineIdx].isFocused = true
 }
 
 function generateRandomMeme() {
@@ -90,6 +91,7 @@ function addLine(txt) {
         pos: { x: 20, y: heightSpace },
         width: 300,
         height: 30,
+        isFocused: false,
     }
 
     if (gMeme.lines.length >= 2) {
@@ -124,14 +126,21 @@ function canvasClicked({ x: clickX, y: clickY }) {
             clickY < pos.y && clickY > pos.y - height
     })
 
-    if (clickedLineIdx === -1) return false
+    if (clickedLineIdx === -1) return gMeme.lines[gMeme.selectedLineIdx].isFocused = false
     gMeme.selectedLineIdx = clickedLineIdx
-    gMeme.lines[gMeme.selectedLineIdx].isDragged = true
-    return true
+    gMeme.lines[gMeme.selectedLineIdx].isFocused = true
+    if (gMeme.lines[gMeme.selectedLineIdx].isFocused) gMeme.lines[gMeme.selectedLineIdx].isDragged = true
+    console.log(`focusssss = `, gMeme.lines[gMeme.selectedLineIdx].isFocused)
+    gMeme.lines[gMeme.selectedLineIdx].isFocused
+    console.log('im clicked');
 }
 
 function isLineDragged() {
     return gMeme.lines[gMeme.selectedLineIdx].isDragged
+}
+
+function isLineFocused() {
+    return gMeme.lines[gMeme.selectedLineIdx].isFocused
 }
 
 function leaveLine() {

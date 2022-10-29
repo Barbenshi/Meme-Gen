@@ -32,7 +32,7 @@
 
     <header class="secondary-header full main-layout">
         <div class="content-container flex space-between">
-            <input type="search" name="img-search" placeholder="🔍Search here...">
+            <input type="search" name="img-search" placeholder="🔍Search here..." oninput="onSetFilter(this.value)">
             <button class="flexible" onclick="onGenerateRandomMeme(this)"> I'm Flexible</button>
             <p>most Common Words</p>
         </div>

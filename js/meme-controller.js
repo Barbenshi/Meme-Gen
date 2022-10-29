@@ -35,7 +35,7 @@ function drawMeme(img, lines, selectedLineIdx) {
     gElCanvas.height = gElCanvas.width * (1 / imgAspect)
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
     lines.forEach((line, idx) => drawText(line, idx))
-    drawRect(lines[selectedLineIdx])
+    if (isLineFocused()) drawRect(lines[selectedLineIdx])
 }
 
 function drawImageFromLocal() {
@@ -95,11 +95,8 @@ function addTouchListeners() {
 }
 
 function onMove(ev) {
-    console.log('moving');
     if (!isLineDragged()) return
-
     const pos = getEvPos(ev)
-    console.log('moving text');
     //Calc the delta , the diff we moved
     const dx = pos.x - gStartPos.x
     const dy = pos.y - gStartPos.y
@@ -114,19 +111,18 @@ function onMove(ev) {
 
 function onDown(ev) {
     const pos = getEvPos(ev)
-    if (!canvasClicked(pos)) return false
-    console.log('you touched me');
+    canvasClicked(pos)
     gStartPos = pos
     document.querySelector('input[type=text]').value = getSelectedLineTxt()
 
     renderMeme()
-    document.body.style.cursor = 'grab'
+    document.body.style.cursor = isLineFocused() ? 'grab' : 'auto'
 }
 
 function onUp() {
-    if (isLineDragged()) leaveLine()
-    console.log('You dont touch me');
-    document.body.style.cursor = 'auto'
+    if (!isLineDragged()) return
+    leaveLine()
+    document.body.style.cursor = 'grab'
 }
 
 
@@ -148,21 +144,20 @@ function onUpdateFontSize(num) {
 function onSwitchLineFocus() {
     switchLineFocus()
     renderMeme()
-    document.querySelector('input[type=text]').value = getSelectedLineTxt()
+    setInputText()
 }
 
 function onRemoveLine() {
     removeLine()
     renderMeme()
-    const txt = getSelectedLineTxt()
-    document.querySelector('input[type=text]').value = txt
+    setInputText()
 }
 
 function onAddLine() {
     setCanvasHeight(gElCanvas.height)
     addLine()
     renderMeme()
-    document.querySelector('input[type=text]').value = ''
+    setInputText()
 }
 
 function onAlignText(num) {
@@ -173,6 +168,11 @@ function onAlignText(num) {
 function onGoToGallery() {
     onShowGallery()
     createMeme()
+    setInputText()
+}
+
+function setInputText() {
+    document.querySelector('input[type=text]').value = getSelectedLineTxt()
 }
 
 function onDownloadImg(elLink) {
@@ -184,7 +184,7 @@ function onSaveImg() {
     uploadImg()
 }
 
-function onImgInput(ev,elInput) {
+function onImgInput(ev, elInput) {
     loadImageFromInput(ev, setLocalImg)
     console.log(elInput.value);
     elInput.value = ''
@@ -233,7 +233,7 @@ function getEvPos(ev) {
 }
 
 
-function onSaveMeme(){
+function onSaveMeme() {
     uploadImg()
     const url = document.querySelector('.upload-link')
     console.log(url);
