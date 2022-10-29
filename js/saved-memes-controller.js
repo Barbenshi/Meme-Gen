@@ -7,9 +7,10 @@ function renderSavedMemes() {
     const strHtmls = savedMemes.map((meme) => {
         const img = getImg(meme.selectedImgId)
         const { url, id } = img
+        console.log(url);
         return `
     <article>
-    <img src=${url} alt="meme-img"
+    <img src="${url}" alt="meme-img"    
     onclick="onSavedImgSelect('${meme.id}')" data-img-id="${id}" class="gallery-image">
     </article>
     `

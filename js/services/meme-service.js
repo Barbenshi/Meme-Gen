@@ -9,6 +9,8 @@ var gKeywordSearchCountMap = {
     'baby': 2
 }
 
+var gPhrase
+
 var gSavedMemes = []
 const STORAGE_KEY = 'savedMemes'
 
@@ -27,7 +29,7 @@ function createMeme(imgId = 1) {
     addLine()
 }
 
-function addLine(txt,size=30) {
+function addLine(txt, size = 30) {
     const heightSpace = 50
     const line = {
         txt,
@@ -38,7 +40,7 @@ function addLine(txt,size=30) {
         width: 300,
         height: 30,
         isFocused: true,
-        font : 'Impact',
+        font: 'Impact',
     }
 
     if (gMeme.lines.length >= 2) {
@@ -104,7 +106,7 @@ function generateRandomMeme() {
         // //TODO change substring to 1 if I want all 15 letters, too much space
         // line.txt = WORDS.reduce((acc,word)=> acc + WORDS[getRandomIntInclusive(0,14)] + ' ' ,'')
         // line.txt = line.txt.charAt(0).toUpperCase() + line.txt.substring(1)
-        
+
         line.pos.y = lineHeight * (lineIdx + 1)
     })
 }
@@ -150,7 +152,7 @@ function isLineFocused() {
     return gMeme.lines[gMeme.selectedLineIdx].isFocused
 }
 
-function removeFocus(){
+function removeFocus() {
     gMeme.lines[gMeme.selectedLineIdx].isFocused = false
 }
 
@@ -209,11 +211,12 @@ function setMeme(meme) {
     gMeme = meme
 }
 
-function setFont(font){
+function setFont(font) {
     gMeme.lines[gMeme.selectedLineIdx].font = font
 }
 
-function addLetter(letter){
-    if (!gMeme.lines[gMeme.selectedLineIdx].txt) gMeme.lines[gMeme.selectedLineIdx].txt = ''
-    gMeme.lines[gMeme.selectedLineIdx].txt += letter
+function updatePhrase(char){
+    if (!gMeme.lines[gMeme.selectedLineIdx].txt) return gPhrase = char
+    char !== 'DEL' ? gPhrase += char : gPhrase = gPhrase.substring(0,gPhrase.length-2)
+    return gPhrase
 }
