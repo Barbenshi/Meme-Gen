@@ -88,8 +88,6 @@ main {
     background-color: var(--clr2);
 }
 
-header {}
-
 p {
     margin: 0;
     font-size: 1.25rem;
@@ -234,7 +232,8 @@ button:hover {
     }
 }
 
-main .img-gallery:not(.hide) {
+main .img-gallery:not(.hide),
+.memes:not(.hide) {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 10px;
@@ -305,7 +304,8 @@ main .img-gallery:not(.hide) {
 @media (max-width:860px) {
 
     main .img-gallery,
-    .img-editor {
+    .img-editor,
+    .memes {
         padding-right: 27px;
         padding-left: 27px;
     }
@@ -316,20 +316,23 @@ main .img-gallery:not(.hide) {
     } */
 }
 
-main .gallery-container>* {
+main .gallery-container>*,
+.memes {
     padding-bottom: 27px;
 }
 
-main .gallery-container:first-child {
+main .gallery-container:first-child,
+.memes {
     padding-top: 27px;
 }
 
-main .img-gallery article {
+main .img-gallery article,
+.memes article {
     box-shadow: -4px 0px 7px 0px;
     cursor: pointer;
 }
 
-main .img-gallery img {
+main  img {
     aspect-ratio: 220 / 165;
 }
 

@@ -66,13 +66,18 @@ function addListeners() {
     window.addEventListener('resize', renderMeme)
 
     //Listen for writing on canvas
-    window.addEventListener('keyup', handleKeyUp)
+    window.addEventListener('keydown', handleKeyDown)
 }
 
-function handleKeyUp(ev) {
+function handleKeyDown(ev) {
+    ev.preventDefault()
     if (!isLineFocused()) return
-    addLetter(ev.key)
-    renderMeme()
+    let keynum
+    keynum = ev.key
+    if (keynum.length === 1) updatePhrase(keynum)
+    else if (keynum === 'Backspace') gPhrase = gPhrase.substring(0, gPhrase.length - 1)
+    else return
+    onSetLineTxt(gPhrase)
     setInputText()
 }
 
@@ -162,6 +167,14 @@ function onGoToGallery() {
     onShowGallery()
     createMeme()
     setInputText()
+    resetShareButton()
+}
+
+function resetShareButton() {
+    const elShareContainer = document.querySelector('.share-container')
+    const str = `<a class="btn" title="Upload to cloud and share" onclick="onSaveImg(this)"><i
+    class="fa fa-cloud" aria-hidden="true"></i></a>`
+    elShareContainer.innerHTML = str
 }
 
 function setInputText() {
@@ -174,9 +187,12 @@ function onDownloadImg(elLink) {
 }
 
 function onSaveImg() {
+    uploadImg()
+    const imgData = gElCanvas.toDataURL('image/jpeg')
+    saveMeme(imgData)
     removeFocus()
     renderMeme()
-    uploadImg()
+    renderSavedMemes()
 }
 
 function onImgInput(ev, elInput) {
@@ -224,14 +240,6 @@ function getEvPos(ev) {
         }
     }
     return pos
-}
-
-
-function onSaveMeme() {
-    uploadImg()
-    const url = document.querySelector('.upload-link')
-    saveMeme(url)
-    renderSavedMemes()
 }
 
 function onSetFont(font) {

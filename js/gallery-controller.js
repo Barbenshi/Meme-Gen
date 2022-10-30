@@ -19,7 +19,7 @@ function renderGallery() {
 
 function onImgSelect(imgId) {
     gImg = null
-    setImg(imgId)
+    createMeme(imgId)
     onEditorInit()
     onShowEditor()
 }
@@ -45,6 +45,7 @@ function onGenerateRandomMeme(elBtn) {
 }
 
 function onShowMemes() {
+    renderSavedMemes()
     document.querySelector('.gallery-container').classList.add('hide')
     document.querySelector('.img-editor').classList.add('hide')
     document.querySelector('button.flexible').classList.add('hide')
