@@ -88,6 +88,8 @@ main {
     background-color: var(--clr2);
 }
 
+header {}
+
 p {
     margin: 0;
     font-size: 1.25rem;
@@ -233,7 +235,7 @@ button:hover {
 }
 
 main .img-gallery:not(.hide),
-.memes:not(.hide) {
+.memes.grid-container:not(.hide) {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 10px;
@@ -332,7 +334,7 @@ main .img-gallery article,
     cursor: pointer;
 }
 
-main img {
+main .img-gallery img .memes img {
     aspect-ratio: 220 / 165;
 }
 
@@ -424,22 +426,22 @@ main .img-editor .gallery-btn,
 }
 
 main .img-editor .gallery-btn:hover,
-.pagination .btn-prev:hover:not(:disabled) {
+.pagination .btn-prev:hover {
     padding-inline-start: 2.5em;
 }
 
-main .pagination .btn-next:hover:not(:disabled) {
+main .pagination .btn-next:hover {
     padding-inline-end: 2.5em;
 }
 
 main .img-editor .gallery-btn:hover::before,
-.pagination .btn-prev:hover:not(:disabled)::before {
+.pagination .btn-prev:hover::before {
     content: " ← ";
     position: absolute;
     left: 1em;
 }
 
-main .pagination .btn-next:hover:not(:disabled)::after {
+main .pagination .btn-next:hover::after {
     content: " → ";
     position: absolute;
     right: 1em;
@@ -529,26 +531,18 @@ main .pagination .btn-next:hover:not(:disabled)::after {
         bottom: 0;
         transform: translateY(100%);
         max-height: 0;
-        /* overflow: hidden; */
-        opacity: 0;
+        overflow: hidden;
         background-color: var(--primaryClr);
-        transition: opacity 0.8s ,max-height 0.8s ease-in-out;
+        transition: opacity 0.8s, max-height 0.8s;
     }
 
 
     .main-header .main-nav ul {
         flex-direction: column;
-        background-color: var(--primaryClr);
     }
 
     body.menu-open .main-nav {
         max-height: 100%;
-        /* overflow: visible; */
-        opacity: 1;
-    }
-
-    body.menu-open .main-nav li:not(:first-child){
-        border-top: 1px solid var(--clr2);
     }
 
     .main-nav li {

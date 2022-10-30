@@ -110,11 +110,11 @@
                             aria-hidden="true"></i>+</button>
                     <button title="Smaller font" onclick="onUpdateFontSize(-1)"><i class="fa fa-font"
                             aria-hidden="true"></i>-</button>
-                    <label for="color" title="change color" class="input-color-label btn">
-                        <i class="fa fa-paint-brush" aria-hidden="true"></i> </label>
-                    <input id="color" class="color-picker btn" type="color" name="text-color" oninput="onChangeColor(this.value)"
-                        value="#ff0000">
                 </div>
+                <label for="color" title="change color" class="input-color-label btn">
+                    <i class="fa fa-paint-brush" aria-hidden="true"></i>                 </label>
+                    <input id="color" class="color-picker btn" type="color" name="text-color" onchange="onChangeColor(this.value)"
+                        value="#ff0000">
 
                 <div class="alignment-btns">
                     <button class="align-left" onclick="onAlignText(1)"><i class="fa fa-align-left"
