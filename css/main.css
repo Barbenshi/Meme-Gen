@@ -328,7 +328,10 @@ input[type=color] {
         padding-right: 27px;
         padding-left: 27px;
     }
-
+    
+     main section.img-editor{
+        padding-top: 69px;
+    }
     /* header{
         padding-right: 27px;
         padding-left: 27px;
