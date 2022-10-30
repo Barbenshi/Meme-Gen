@@ -63,7 +63,7 @@
             <input list="keys" type="search" name="img-search" placeholder="🔍Search here..."
                 oninput="onSetFilter(this.value)">
             <button class="flexible" onclick="onGenerateRandomMeme(this)"> I'm Flexible</button>
-            <p>most Common Words</p>
+            <!-- <p>most Common Words</p> -->
         </div>
     </header>
 
@@ -86,71 +86,85 @@
                 <canvas id="c" height="250" width="250" style="border:1px solid black"></canvas>
             </div>
 
-            <div class="features flex flex-column justify-center align-center fa-regular">
-                <button onclick="onGoToGallery()" class="gallery-btn">Go back to Gallery</button>
-                <input type="text" oninput="onSetLineTxt(this.value)" placeholder="Enter your Meme line here">
-                <div class="text-modifiers">
-                    <button title="Switch focus on line" onclick="onSwitchLineFocus()" class="switch"> <i
+            <div class="features fa-regular flex flex-column justify-center align-center">
+                <section class="features-container">
+                    <button onclick="onGoToGallery()" class="gallery-btn">Go back to Gallery</button>
+                    <input type="text" oninput="onSetLineTxt(this.value)" placeholder="Enter your Meme line here">
+
+                    <button title="Switch focus on line" onclick="onSwitchLineFocus()" class="switch-btn"> <i
                             class="fa fa-exchange" aria-hidden="true"></i></button>
                     <button class="add-btn" title="Add new line" onclick="onAddLine()"><i class="fa fa-plus"
                             aria-hidden="true"></i></button>
                     <button class="remove-btn" title="Remove current line" onclick="onRemoveLine()"><i
                             class="fa fa-trash-o" aria-hidden="true"></i></button>
-                </div>
 
-                <div class="font-size-btns">
-                    <select class="btn" name="font-family" onchange="onSetFont(this.value)">
+
+
+
+                    <button class="bigger-font-btn" title="Bigger font" onclick="onUpdateFontSize(1)"><i
+                            class="fa fa-font" aria-hidden="true"></i>+</button>
+                    <button class="smaller-font-btn" title="Smaller font" onclick="onUpdateFontSize(-1)"><i
+                            class="fa fa-font" aria-hidden="true"></i>-</button>
+                    <button title="Align text to the left" class="align-left" onclick="onAlignText(1)"><i
+                            class="fa fa-align-left" aria-hidden="true"></i></button>
+                    <button title="Align text to center" class="align-center" onclick="onAlignText(0)"><i
+                            class="fa fa-align-center" aria-hidden="true"></i></button>
+                    <button title="Align text to the right" class="align-right" onclick="onAlignText(-1)"><i
+                            class="fa fa-align-right" aria-hidden="true"></i></button>
+
+                    <select class="font-family btn" name="font-family" onchange="onSetFont(this.value)">
                         <option value="impact">Impact</option>
                         <option value="sans-serif">Sans-serif</option>
                         <option value="lato-reg">Lato</option>
                         <option value="eurofurence">Eurofurence</option>
                         <option value="montserrat-reg">Montserrat</option>
                     </select>
-                    <button title="Bigger font" onclick="onUpdateFontSize(1)"><i class="fa fa-font"
-                            aria-hidden="true"></i>+</button>
-                    <button title="Smaller font" onclick="onUpdateFontSize(-1)"><i class="fa fa-font"
-                            aria-hidden="true"></i>-</button>
-                    <label for="color" title="change color" class="input-color-label btn">
+                    <label for="color" title="Change color" class="input-color-label btn">
+                        <i class="fa fa-eyedropper" aria-hidden="true"></i> </label>
+
+                    <label for="stroke-color" title="Change stroke color" class="input-stroke-label btn">
                         <i class="fa fa-paint-brush" aria-hidden="true"></i> </label>
-                    <input id="color" class="color-picker btn" type="color" name="text-color"
-                        onchange="onChangeColor(this.value)" value="#ff0000">
-                </div>
 
+                    <div class="random-emojis">
+                        <ul class="clean-list flex ">
+                            <li onclick="onAddLine('👽')">👽</li>
+                            <li onclick="onAddLine('🤬')">🤬</li>
+                            <li onclick="onAddLine('🎃')">🎃</li>
+                            <li onclick="onAddLine('👻')">👻</li>
+                            <li onclick="onAddLine('😎')">😎</li>
+                            <li onclick="onAddLine('💖')">💖</li>
+                            <li onclick="onAddLine('🙊')">🙊</li>
+                            <li onclick="onAddLine('🦄')">🦄</li>
+                            <li onclick="onAddLine('🐧')">🐧</li>
+                        </ul>
+                    </div>
 
-                <div class="alignment-btns">
-                    <button class="align-left" onclick="onAlignText(1)"><i class="fa fa-align-left"
-                            aria-hidden="true"></i></button>
-                    <button class="align-center" onclick="onAlignText(0)"><i class="fa fa-align-center"
-                            aria-hidden="true"></i></button>
-                    <button class="align-right" onclick="onAlignText(-1)"><i class="fa fa-align-right"
-                            aria-hidden="true"></i></button>
-                </div>
-                <div class="random-emojis">
-                    <ul class="clean-list flex ">
-                        <li onclick="onAddLine('👽')">👽</li>
-                        <li onclick="onAddLine('🤬')">🤬</li>
-                        <li onclick="onAddLine('🎃')">🎃</li>
-                        <li onclick="onAddLine('👻')">👻</li>
-                        <li onclick="onAddLine('😎')">😎</li>
-                        <li onclick="onAddLine('💖')">💖</li>
-                    </ul>
-                </div>
-
-                <section class="data-btns flex align-center fa-regular">
                     <a href="" title="Download Img" class="download btn" download="my-file.png"
                         onclick="onDownloadImg(this)"><i class="fa fa-download" aria-hidden="true"></i></a>
-                    <!-- <button class="save-meme" onclick="onSaveMeme()">Save</button> -->
-                    <div class="share-container">
-                        <a class="btn" title="Upload to cloud and share" onclick="onSaveImg(this)"><i
-                                class="fa fa-cloud" aria-hidden="true"></i></a>
-                    </div>
+
+                    <a title="Share your photo" class="share btn" onclick="onUploadToFacebook()"><i class="fa fa-share"
+                            aria-hidden="true"></i></a>
+                    <a class="upload btn" title="Upload to cloud and save" onclick="onSaveImg(this)"><i
+                            class="fa fa-cloud" aria-hidden="true"></i></a>
                 </section>
                 <label class="file" for="file-input">Upload your own image...</label>
-                <input id="file-input" class="custom-file-input" type="file" name="upload-img"
-                    onchange="onImgInput(event,this)">
                 <div class="user-msg"></div>
+
+                <input id="color" class="color-picker btn" type="color" name="text-color"
+                    oninput="onChangeColor(this.value)" value="#ff0000">
+                <input id="stroke-color" class="color-picker btn" type="color" name="text-color"
+                    oninput="onChangeStrokeColor(this.value)" value="#fa9548">
+            </div>
+
+
+
+
+
             </div>
         </section>
+
+        <input id="file-input" class="custom-file-input" type="file" name="upload-img"
+            onchange="onImgInput(event,this)">
 
         <section class="memes hide">
             No Memes Created Yet

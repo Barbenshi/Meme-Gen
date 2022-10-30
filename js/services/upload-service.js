@@ -7,17 +7,25 @@ function uploadImg() {
     function onSuccess(uploadedImgUrl) {
       // Encode the instance of certain characters in the url
       const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
-      document.querySelector('.user-msg').innerHTML = `Your photo is available
+      document.querySelector('.user-msg').innerHTML = `Your photo is saved and is available
           <a class="upload-link" href="${uploadedImgUrl}" target="_blank">
              here 
           </a>
           `
+    }
+    // Send the image to the server
+    doUploadImg(imgDataUrl, onSuccess)
+  }
+
+function uploadImgToFacebook() {
+    const imgDataUrl = gElCanvas.toDataURL("image/jpeg")// Gets the canvas content as an image format
+  
+    // A function to be called if request succeeds
+    function onSuccess(uploadedImgUrl) {
+      // Encode the instance of certain characters in the url
+      const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
       // Create a link that on click will make a post in facebook with the image we uploaded
-      document.querySelector('.share-container').innerHTML = `
-          <a class="btn fa-brands facebook share" href="https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
-             Share   
-          </a>
-          `
+       window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}`)   
     }
     // Send the image to the server
     doUploadImg(imgDataUrl, onSuccess)

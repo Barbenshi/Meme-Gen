@@ -76,6 +76,10 @@ function changeColor(color) {
     gMeme.lines[gMeme.selectedLineIdx].color = color
 }
 
+function changeStrokeColor(color){
+    gMeme.lines[gMeme.selectedLineIdx].strokeColor = color
+}
+
 function updateFontSize(num) {
     gMeme.lines[gMeme.selectedLineIdx].size += num
 }

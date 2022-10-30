@@ -20,7 +20,9 @@ function renderSavedMemes() {
 function onSavedImgSelect(memeId) {
     const meme = getMemeById(memeId)
     setMeme(meme)
+    resetShareButton()
     renderMeme()
+    setInputText()
     onShowEditor()
 }
 

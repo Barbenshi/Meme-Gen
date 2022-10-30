@@ -6,7 +6,7 @@ const KEY_WORDS = [['funny', 'politics'], ['cute', 'animals'], ['cute', 'couples
 ['evil', 'laugh'], ['politics', 'success'], ['wrestling', 'love'], ['saint', 'tv', 'see you try'], ['leonardo', 'cheers'],
 ['exterminator'], ['smart', 'funny'], ['star wars', 'science fiction'], ['politics', 'evil'], ['movies', 'smart'], ['funny', 'politics'], [['cute', 'animals']], ['cute', 'couples', 'dogs'], ['lazy', 'cats', 'sunday morning'], ['baby', 'win'], ['smart', 'clumzy'], ['baby', 'surprised'], ['not interested', 'You are Right'],
 ['evil', 'laugh'], ['politics', 'success'], ['smart', 'funny']]
-const PAGE_SIZE = 11
+const PAGE_SIZE = 9
 var gPageIdx = 0
 
 var gId = 1

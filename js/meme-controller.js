@@ -135,6 +135,11 @@ function onChangeColor(color) {
     renderMeme()
 }
 
+function onChangeStrokeColor(color){
+    changeStrokeColor(color)
+    renderMeme()
+}
+
 function onUpdateFontSize(num) {
     updateFontSize(num)
     renderMeme()
@@ -177,10 +182,6 @@ function setDefaultProps(imgId) {
 }
 
 function resetShareButton() {
-    const elShareContainer = document.querySelector('.share-container')
-    const str = `<a class="btn" title="Upload to cloud and share" onclick="onSaveImg(this)"><i
-    class="fa fa-cloud" aria-hidden="true"></i></a>`
-    elShareContainer.innerHTML = str
     document.querySelector('.user-msg').innerHTML = ''
 }
 
@@ -200,6 +201,10 @@ function onSaveImg() {
     removeFocus()
     renderMeme()
     renderSavedMemes()
+}
+
+function onUploadToFacebook(){
+    uploadImgToFacebook()
 }
 
 function onImgInput(ev, elInput) {
