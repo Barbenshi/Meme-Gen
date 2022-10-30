@@ -421,13 +421,14 @@ main .img-editor .features {
 }
 
 main .img-editor .btn,
-main .img-editor button{
+main .img-editor button {
     padding: 0;
 }
 
-@media (min-width:500px){
+@media (min-width:500px) {
+
     main .img-editor .btn,
-    main .img-editor button{
+    main .img-editor button {
         padding: 0.625em 0.625em;
     }
 }
@@ -437,11 +438,20 @@ main .img-editor .features-container {
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(7, 1fr);
     gap: 0.3em;
-    overflow: hidden;
 }
 
-@media (min-width:500px){
-    main .img-editor .features-container{
+main .img-editor .features-container ul {
+    overflow-y: scroll;
+}
+
+.features-container ul::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+@media (min-width:500px) {
+    main .img-editor .features-container {
         gap: 1em;
     }
 }
