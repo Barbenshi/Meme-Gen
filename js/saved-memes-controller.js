@@ -6,7 +6,6 @@ function renderSavedMemes() {
     const savedMemes = getSavedMemes()
     if (!savedMemes) return
     const strHtmls = savedMemes.map((meme, idx) => {
-        console.log(gSavedImgs[idx]);
         const { url, id } = gSavedImgs[idx]
         return `
     <article>

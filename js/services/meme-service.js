@@ -9,8 +9,6 @@ var gKeywordSearchCountMap = {
     'baby': 2
 }
 
-var gPhrase
-
 const STORAGE_KEY = 'savedMemes'
 var gSavedMemes
 loadMemesFromLocalStorage()
@@ -219,8 +217,11 @@ function setFont(font) {
     gMeme.lines[gMeme.selectedLineIdx].font = font
 }
 
-function updatePhrase(char) {
-    if (!gMeme.lines[gMeme.selectedLineIdx].txt) return gPhrase = char
-    char !== 'DEL' ? gPhrase += char : gPhrase = gPhrase.substring(0, gPhrase.length - 2)
-    return gPhrase
+function addCharToCurrentLine(char) {
+    gMeme.lines[gMeme.selectedLineIdx].txt = gMeme.lines[gMeme.selectedLineIdx].txt ?
+        gMeme.lines[gMeme.selectedLineIdx].txt + char : char
+}
+
+function removeLastChar() {
+    gMeme.lines[gMeme.selectedLineIdx].txt = gMeme.lines[gMeme.selectedLineIdx].txt.substring(0, gMeme.lines[gMeme.selectedLineIdx].txt.length - 2)
 }

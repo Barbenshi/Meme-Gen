@@ -99,6 +99,15 @@ small {
     color: var(--clr0);
 }
 
+input[type=file]{
+    display: none;
+}
+
+label{
+    cursor: pointer;
+}
+
+
 /* buttons */
 button,
 .btn {
@@ -265,7 +274,7 @@ main .img-gallery:not(.hide),
         width: 100px;
         height: 33px;
 
-        transition: box-shadow .6s;
+        transition: all .6s;
     }
 
     .main-nav {
@@ -273,7 +282,8 @@ main .img-gallery:not(.hide),
     }
 }
 
-.main-header a:active {
+.main-header a.active,
+.main-header a:hover {
     color: var(--clr1);
     box-shadow: inset 0px -4px 0;
 }
@@ -323,6 +333,39 @@ main .gallery-container>*,
     padding-bottom: 27px;
 }
 
+main .gallery-container .custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.custom-file-input::before {
+    content: 'Upload your own image...';
+    /* display: inline-block; */
+    display: flex;
+    justify-self: center;
+    align-self: center;
+    /* background: linear-gradient(top, #f9f9f9, #e3e3e3); */
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 700;
+    font-size: 10pt;
+}
+
+.custom-file-input:hover::before {
+    border-color: black;
+}
+
+.custom-file-input:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+
+
 main .gallery-container:first-child,
 .memes {
     padding-top: 27px;
@@ -330,14 +373,29 @@ main .gallery-container:first-child,
 
 main .img-gallery article,
 .memes article {
-    box-shadow: -4px 0px 7px 0px;
-    cursor: pointer;
     border-radius: 2em;
     height: max-content;
+    cursor: pointer;
+}
+
+main .img-gallery article:first-child{
+    background-color: var(--clr3);
+    opacity: 0.5;
+    height: 325px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-gallery label{
+    height: 100%;
+    flex-basis: 100%;
+    padding: 120px;
 }
 
 main .img-gallery article img,
 .memes img {
+    box-shadow: -4px 2px 7px;
     border-radius: 2em;
 }
 
@@ -352,14 +410,14 @@ main .img-editor .features {
     background-color: var(--clr0);
     border-radius: 1em;
     padding: 20px;
+    background-color: var(--clr3);
 }
 
 main .img-editor .features input[type=text] {
     border: none;
     padding: 0 .325em;
     font-size: 1.2em;
-    border-radius: 1em;
-    box-shadow: -8px 5px 4px;
+    box-shadow: inset 0px -4px 0px var(--clr2);
 }
 
 main .img-editor .features input[type=text]:focus {
@@ -481,6 +539,7 @@ main .pagination .btn-next:not(:disabled):hover::after {
 
 /* secondary-footer */
 .secondary-footer {
+    max-height: 50px;
     padding-top: 77px;
     padding-bottom: 77px;
 }
@@ -528,23 +587,36 @@ main .pagination .btn-next:not(:disabled):hover::after {
         margin-bottom: 5px;
     }
 
-    .main-header .main-nav {
+    .main-header .main-nav{
         position: absolute;
         width: 100%;
         bottom: 0;
         transform: translateY(100%);
+        opacity: 0;
         max-height: 0;
         overflow: hidden;
         background-color: var(--primaryClr);
-        transition: opacity 0.8s, max-height 0.8s;
+        transition: opacity 0.8s , max-height 0.8s ease-in-out;
     }
 
 
     .main-header .main-nav ul {
         flex-direction: column;
+        background-color: var(--primaryClr);
+        position: absolute;
+        width: 100%;
+        max-height: 0;
+        overflow: visible;
+        transition: opacity 0.8s, max-height 0.8s;
     }
 
-    body.menu-open .main-nav {
+    body.menu-open .main-nav{
+        max-height: 100%;
+        opacity: 1;
+        overflow: visible;
+    }
+
+    body.menu-open .main-nav ul{
         max-height: 100%;
     }
 
@@ -572,5 +644,17 @@ main .pagination .btn-next:not(:disabled):hover::after {
 
     body.menu-open .menu-btn::before {
         content: 'X';
+    }
+}
+
+
+/* Animations */
+@keyframes expand {
+    0% {
+        height: 0px
+    }
+
+    100% {
+        height: 1000px
     }
 }

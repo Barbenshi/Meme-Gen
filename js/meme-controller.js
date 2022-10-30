@@ -70,15 +70,16 @@ function addListeners() {
 }
 
 function handleKeyDown(ev) {
-    ev.preventDefault()
+    // ev.preventDefault()
     if (!isLineFocused()) return
     let keynum
     keynum = ev.key
-    if (keynum.length === 1) updatePhrase(keynum)
-    else if (keynum === 'Backspace') gPhrase = gPhrase.substring(0, gPhrase.length - 1)
+    if (keynum === ' ') ev.preventDefault()
+    if (keynum.length === 1) addCharToCurrentLine(keynum)
+    else if (keynum === 'Backspace') removeLastChar()
     else return
-    onSetLineTxt(gPhrase)
     setInputText()
+    renderMeme()
 }
 
 function addMouseListeners() {
@@ -165,7 +166,12 @@ function onAlignText(num) {
 
 function onGoToGallery() {
     onShowGallery()
-    createMeme()
+    // createMeme()
+    // setInputText()
+}
+
+function setDefaultProps(imgId) {
+    createMeme(imgId)
     setInputText()
     resetShareButton()
 }
@@ -175,6 +181,7 @@ function resetShareButton() {
     const str = `<a class="btn" title="Upload to cloud and share" onclick="onSaveImg(this)"><i
     class="fa fa-cloud" aria-hidden="true"></i></a>`
     elShareContainer.innerHTML = str
+    document.querySelector('.user-msg').innerHTML = ''
 }
 
 function setInputText() {
@@ -196,6 +203,9 @@ function onSaveImg() {
 }
 
 function onImgInput(ev, elInput) {
+    setDefaultProps()
+    onEditorInit()
+
     loadImageFromInput(ev, setLocalImg)
     elInput.value = ''
 }
@@ -211,6 +221,8 @@ function loadImageFromInput(ev, onImageReady) {
         img.onload = onImageReady.bind(null, img)
         // Can also do it this way:
         // img.onload = () => onImageReady(img)
+        onShowEditor()
+
     }
     reader.readAsDataURL(ev.target.files[0]) // Read the file we picked
 }
@@ -249,9 +261,12 @@ function onSetFont(font) {
 
 function onShowGallery() {
     document.querySelector('.gallery-container').classList.remove('hide')
+    document.querySelector('.gallery-link').classList.add('active')
     document.querySelector('.img-editor').classList.add('hide')
     document.querySelector('.main-footer').classList.remove('hide')
     document.querySelector('button.flexible').classList.remove('hide')
     document.querySelector('.memes').classList.add('hide')
+    document.querySelector('.memes-link').classList.remove('active')
+    document.querySelector('.secondary-header').classList.remove('hide')
     document.body.classList.remove('menu-open')
 }

@@ -1,6 +1,6 @@
 'use strict'
 
-function onGalleryInit(){
+function onGalleryInit() {
     renderGallery()
     getPaginationNumbers()
     handlePagination()
@@ -8,10 +8,15 @@ function onGalleryInit(){
 
 function renderGallery() {
     const imgs = getImgsForDisplay()
-    const strHtmls = imgs.map(({ url, id }) => `
+    let strHtmls = imgs.map(({ url, id }) => `
     <article>
     <img src=${url} alt="meme-img"
     onclick="onImgSelect(${id})" data-id="${id}" class="gallery-image">
+    </article>
+    `)
+    strHtmls.unshift(`
+    <article>
+    <label class="file" for="file-input">Upload your own image...</label>
     </article>
     `)
     document.querySelector('.img-gallery').innerHTML = strHtmls.join('')
@@ -19,7 +24,7 @@ function renderGallery() {
 
 function onImgSelect(imgId) {
     gImg = null
-    createMeme(imgId)
+    setDefaultProps(imgId)
     onEditorInit()
     onShowEditor()
 }
@@ -27,9 +32,12 @@ function onImgSelect(imgId) {
 function onShowEditor() {
     document.querySelector('.gallery-container').classList.add('hide')
     document.querySelector('.img-editor').classList.remove('hide')
+    document.querySelector('.secondary-header').classList.add('hide')
     document.querySelector('.main-footer').classList.add('hide')
     document.querySelector('button.flexible').classList.add('hide')
     document.querySelector('.memes').classList.add('hide')
+    document.querySelector('.memes-link').classList.remove('active')
+    document.querySelector('.gallery-link').classList.remove('active')
 }
 
 function onShowAbout() {
@@ -47,10 +55,14 @@ function onGenerateRandomMeme(elBtn) {
 function onShowMemes() {
     renderSavedMemes()
     document.querySelector('.gallery-container').classList.add('hide')
+    document.querySelector('.gallery-link').classList.remove('active')
     document.querySelector('.img-editor').classList.add('hide')
     document.querySelector('button.flexible').classList.add('hide')
     document.body.classList.remove('menu-open')
     document.querySelector('.memes').classList.remove('hide')
+    document.querySelector('.memes-link').classList.add('active')
+    document.querySelector('.secondary-header').classList.remove('hide')
+    // make less lines of code
 }
 
 function onUpdatePage(num) {
@@ -82,7 +94,7 @@ function onSetPage() {
     handlePagination()
 }
 
-function handlePagination(){
+function handlePagination() {
     // Handling next-prev btns
     const prevBtn = document.querySelector('.pagination .btn-prev')
     prevBtn.disabled = isFirstPage()
@@ -97,7 +109,7 @@ function handlePagination(){
     currPage.classList.add('active')
 }
 
-function onSetFilter(filter){
+function onSetFilter(filter) {
     setFilter(filter)
     renderGallery()
 }
