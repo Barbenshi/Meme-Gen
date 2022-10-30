@@ -151,9 +151,9 @@ function onRemoveLine() {
     setInputText()
 }
 
-function onAddLine(txt, size) {
+function onAddLine(txt) {
     setCanvasHeight(gElCanvas.height)
-    addLine(txt, size)
+    addLine(txt)
     renderMeme()
     setInputText()
 }

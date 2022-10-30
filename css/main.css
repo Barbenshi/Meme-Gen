@@ -235,7 +235,7 @@ button:hover {
 }
 
 main .img-gallery:not(.hide),
-.memes.grid-container:not(.hide) {
+.memes:not(.hide) {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 10px;
@@ -332,10 +332,13 @@ main .img-gallery article,
 .memes article {
     box-shadow: -4px 0px 7px 0px;
     cursor: pointer;
+    border-radius: 2em;
+    height: max-content;
 }
 
-main .img-gallery img .memes img {
-    aspect-ratio: 220 / 165;
+main .img-gallery article img,
+.memes img {
+    border-radius: 2em;
 }
 
 main .img-editor {
@@ -426,22 +429,22 @@ main .img-editor .gallery-btn,
 }
 
 main .img-editor .gallery-btn:hover,
-.pagination .btn-prev:hover {
+.pagination .btn-prev:hover:not(:disabled) {
     padding-inline-start: 2.5em;
 }
 
-main .pagination .btn-next:hover {
+main .pagination .btn-next:hover:not(:disabled) {
     padding-inline-end: 2.5em;
 }
 
 main .img-editor .gallery-btn:hover::before,
-.pagination .btn-prev:hover::before {
+.pagination .btn-prev:hover:not(:disabled)::before {
     content: " ← ";
     position: absolute;
     left: 1em;
 }
 
-main .pagination .btn-next:hover::after {
+main .pagination .btn-next:not(:disabled):hover::after {
     content: " → ";
     position: absolute;
     right: 1em;
