@@ -262,7 +262,7 @@ input[type=color] {
 
 .main-header .content-container {
     position: relative;
-    height: 7vh;
+    height: 100%;
 }
 
 
@@ -328,10 +328,11 @@ input[type=color] {
         padding-right: 27px;
         padding-left: 27px;
     }
-    
-     main section.img-editor{
+
+    main section.img-editor {
         padding-top: 69px;
     }
+
     /* header{
         padding-right: 27px;
         padding-left: 27px;
@@ -699,6 +700,14 @@ main .pagination .btn-next:not(:disabled):hover::after {
         background-color: var(--primaryClr);
     }
 
+    .main-header .logo {
+        padding-left: 27px;
+    }
+
+    .main-header .menu-btn {
+        padding-right: 27px;
+    }
+
     .secondary-header {
         padding-top: 7vh;
         padding-left: 20px;
@@ -752,15 +761,24 @@ main .pagination .btn-next:not(:disabled):hover::after {
 
     .main-nav li {
         flex-basis: 30px;
+        padding-left: 27px;
     }
+
+
 
     .main-nav a {
         color: var(--clr0);
     }
 
     body.menu-open .main-nav li {
-        border: none;
+        /* border: none; */
         background-color: var(--primaryClr);
+    }
+
+    .main-nav ul>li {
+        border-top: 1px solid var(--clr2);
+        display: flex;
+        align-items: center;
     }
 
     .menu-btn {
