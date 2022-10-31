@@ -133,7 +133,8 @@ button:disabled {
     cursor: not-allowed;
 }
 
-button:hover {
+button:hover,
+.btn:hover {
     opacity: 70%;
 }
 
@@ -540,7 +541,11 @@ main .features-container .upload {
     grid-row: 7;
 }
 
-
+main .features-container .btn,
+main .features-container button {
+    background-color: var(--clr0);
+    color: var(--clr1);
+}
 
 main .img-editor .features input[type=text] {
     border: none;
@@ -582,7 +587,7 @@ main .img-editor .upload-link {
 
 main .img-editor .random-emojis {
     font-size: 1.5em;
-    background-color: var(--primaryClr);
+    background-color: var(--clr0);
     border-radius: 1em;
 }
 
