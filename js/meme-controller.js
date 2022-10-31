@@ -106,7 +106,7 @@ function onMove(ev) {
     //The canvas is render again after every move
     renderMeme()
 
-    document.body.style.cursor = 'grabbing'
+    gElCanvas.style.cursor = 'grabbing'
 }
 
 function onDown(ev) {
@@ -116,13 +116,13 @@ function onDown(ev) {
     document.querySelector('input[type=text]').value = getSelectedLineTxt()
 
     renderMeme()
-    document.body.style.cursor = isLineFocused() ? 'grab' : 'auto'
+   gElCanvas.style.cursor = isLineFocused() ? 'grab' : 'auto'
 }
 
 function onUp() {
     if (!isLineDragged()) return
     leaveLine()
-    document.body.style.cursor = 'grab'
+    gElCanvas.style.cursor = 'grab'
 }
 
 function onSetLineTxt(txt) {
@@ -140,8 +140,8 @@ function onChangeStrokeColor(color){
     renderMeme()
 }
 
-function onUpdateFontSize(num) {
-    updateFontSize(num)
+function onUpdateFontSize(diff) {
+    updateFontSize(diff)
     renderMeme()
 }
 
